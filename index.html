@@ -3,478 +3,916 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portafolio de Evidencias – Evaluación Educativa (UNAB)</title>
+  <title>Portafolio de Evidencias – Evaluación Educativa · UNAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      /* Paleta inspirada en UNAB (azul institucional + rojo) */
-      --blue-900:#0b1b3a;
-      --blue-800:#12306b;
-      --blue-700:#1b4aa6;
-      --red-600:#d61f1f;
+    :root {
+      --unab-navy:   #0a1a3d;
+      --unab-blue:   #1040a0;
+      --unab-red:    #c8202a;
+      --unab-gold:   #c9940a;
+      --bg:          #f5f3ee;
+      --surface:     #ffffff;
+      --surface2:    #f0ede6;
+      --border:      #ddd8ce;
+      --text:        #1a1510;
+      --text2:       #5a5248;
+      --text3:       #8a8278;
+      --radius:      16px;
+      --radius2:     10px;
+      --shadow:      0 4px 24px rgba(10,26,61,.10);
+      --shadow2:     0 2px 8px rgba(10,26,61,.07);
+      --serif: 'Source Serif 4', Georgia, serif;
+      --display: 'Playfair Display', Georgia, serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
 
-      --bg: #0b1220;
-      --panel: rgba(255,255,255,.04);
-      --card: rgba(255,255,255,.03);
-      --border: rgba(255,255,255,.10);
-      --text: #edf2ff;
-      --muted:#b7c3e3;
-      --shadow: 0 14px 38px rgba(0,0,0,.40);
-      --radius: 18px;
-      --radius2: 14px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      --sans: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif;
+    /* ─── LAYOUT ─── */
+    .wrapper {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(900px 600px at 10% 0%, rgba(27,74,166,.22), transparent 65%),
-        radial-gradient(900px 600px at 80% 20%, rgba(214,31,31,.16), transparent 60%),
-        var(--bg);
-      min-height:100vh;
-    }
-    a{color:inherit}
-    .layout{
-      max-width:1200px;
-      margin:0 auto;
-      padding:18px;
-      display:grid;
-      grid-template-columns: 300px 1fr;
-      gap:16px;
-    }
-    @media (max-width: 980px){
-      .layout{grid-template-columns:1fr}
-      .sidebar{position:sticky; top:0; z-index:40}
+    @media (max-width: 900px) {
+      .wrapper { grid-template-columns: 1fr; }
     }
 
-    .sidebar{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--unab-navy);
+      color: #e8e4dc;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      border-right: 3px solid var(--unab-red);
+    }
+    @media (max-width: 900px) {
+      .sidebar { position: static; height: auto; flex-direction: row; flex-wrap: wrap; padding: 16px; gap: 16px; }
+    }
+    .logo-block { text-align: center; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .logo-block .univ { font-family: var(--display); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--unab-gold); }
+    .logo-block .sigla {
+      font-family: var(--display);
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: -2px;
+    }
+    .logo-block .asig { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; letter-spacing: .5px; }
+
+    .progress-wrap { display: flex; flex-direction: column; gap: 4px; }
+    .progress-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: 1px; }
+    .progress-bar { height: 4px; background: rgba(255,255,255,.12); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--unab-blue), var(--unab-red)); transition: width .2s; }
+
+    nav .nav-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.35); text-transform: uppercase; margin-bottom: 8px; }
+    nav ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    nav ul li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: var(--radius2);
+      text-decoration: none;
+      color: rgba(255,255,255,.65);
+      font-size: 13.5px;
+      transition: background .15s, color .15s;
+    }
+    nav ul li a:hover { background: rgba(255,255,255,.07); color: #fff; }
+    nav ul li a.active { background: rgba(200,32,42,.25); color: #fff; border-left: 3px solid var(--unab-red); }
+    nav ul li a .num { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,.3); }
+
+    .sidebar-meta { margin-top: auto; font-size: 12px; color: rgba(255,255,255,.3); line-height: 1.5; border-top: 1px solid rgba(255,255,255,.08); padding-top: 16px; }
+
+    /* ─── MAIN ─── */
+    main {
+      padding: 0 0 80px;
+    }
+
+    /* ─── TOPBAR ─── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245,243,238,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .topbar-title { font-family: var(--mono); font-size: 12px; color: var(--text3); letter-spacing: .5px; }
+    .btn {
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: var(--mono);
+      transition: border-color .15s, background .15s;
+    }
+    .btn:hover { border-color: var(--unab-red); background: #fff5f5; }
+    .btn.print { background: var(--unab-navy); color: #fff; border-color: var(--unab-navy); }
+    .btn.print:hover { background: var(--unab-blue); }
+
+    /* ─── SECTIONS ─── */
+    .content { padding: 40px; display: flex; flex-direction: column; gap: 36px; }
+    @media (max-width: 700px) { .content { padding: 20px; } .topbar { padding: 10px 20px; } }
+
+    /* Section header stripe */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--unab-red);
+      padding: 4px 9px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+    .section-num.blue { background: var(--unab-blue); }
+    .section-num.navy { background: var(--unab-navy); }
+    .section-num.gold { background: var(--unab-gold); }
+    .section-title {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--unab-navy);
+      line-height: 1.2;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
       box-shadow: var(--shadow);
-      padding:14px;
     }
-    .brand{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:6px 6px 12px;
-      border-bottom:1px solid var(--border);
-      margin-bottom:12px;
-    }
-    .brand .t{
-      margin:0;
-      font-size:14px;
-      line-height:1.2;
-      letter-spacing:.2px;
-    }
-    .pill{
-      font-family:var(--mono);
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-    }
-    .nav{
-      display:grid;
-      gap:8px;
-      margin-top:10px;
-    }
-    .nav a{
-      text-decoration:none;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      transition:.12s transform ease, .12s background ease;
-    }
-    .nav a:hover{transform: translateY(-1px); background:rgba(255,255,255,.06)}
-    .nav a.active{
-      background: linear-gradient(135deg, rgba(27,74,166,.25), rgba(214,31,31,.18));
-      border-color: rgba(255,255,255,.18);
-      transform:none;
-    }
-    .k{
-      display:flex; align-items:center; gap:10px;
-    }
-    .dot{width:10px;height:10px;border-radius:999px;background: var(--blue-700)}
-    .dot.r{background: var(--red-600)}
-    .dot.g{background: #45ff9a}
-    .mini{
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-    }
+    .card + .card { margin-top: 0; }
 
-    .main{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      overflow:hidden;
+    /* ─── PORTADA ─── */
+    #portada .portada-hero {
+      background: linear-gradient(135deg, var(--unab-navy) 0%, #1a3170 60%, #2a0a0d 100%);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
     }
-    .topbar{
-      position:sticky; top:0; z-index:30;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:12px 14px;
-      background: rgba(11,18,32,.70);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--border);
+    #portada .portada-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,32,42,.25) 0%, transparent 70%);
     }
-    .topbar .left{
-      display:flex; flex-direction:column; gap:2px;
+    #portada .portada-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,64,160,.3) 0%, transparent 70%);
     }
-    .topbar .title{
-      font-weight:800;
-      letter-spacing:.2px;
+    #portada .hero-inner { position: relative; z-index: 1; }
+    #portada .hero-univ {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--unab-gold);
+      margin-bottom: 16px;
     }
-    .topbar .sub{
-      font-size:12px;
-      color:var(--muted);
+    #portada .hero-title {
+      font-family: var(--display);
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 900;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 8px;
     }
-    .topbar .right{
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    #portada .hero-subtitle {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(14px, 2vw, 18px);
+      color: rgba(255,255,255,.7);
+      margin-bottom: 28px;
     }
-    .btn{
-      cursor:pointer;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      padding:8px 10px;
-      border-radius:12px;
-      font-size:13px;
+    #portada .hero-divider {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--unab-red), var(--unab-gold));
+      border-radius: 2px;
+      margin-bottom: 28px;
     }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(27,74,166,.25), rgba(214,31,31,.18));
-    }
-    .btn:hover{filter:brightness(1.06)}
-    .progress{
-      height:6px; width:160px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.10);
-      overflow:hidden;
-    }
-    .bar{
-      height:100%;
-      width:0%;
-      background: linear-gradient(90deg, var(--blue-700), var(--red-600));
-    }
-
-    .content{
-      padding:14px;
-      display:grid;
-      gap:12px;
-    }
-    .card{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.03);
-      padding:14px;
-    }
-    .card h2{
-      margin:0 0 6px;
-      font-size:18px;
-    }
-    .card h3{
-      margin:0 0 10px;
-      font-size:15px;
-    }
-    .muted{color:var(--muted)}
-    .grid2{
-      display:grid; gap:12px;
+    #portada .meta-grid {
+      display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
     }
-    @media (max-width: 980px){ .grid2{grid-template-columns:1fr} }
+    @media (max-width: 600px) { #portada .meta-grid { grid-template-columns: 1fr; } }
+    #portada .meta-item { font-size: 13px; }
+    #portada .meta-label { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.4); }
+    #portada .meta-value { color: rgba(255,255,255,.92); font-weight: 400; }
 
-    .kv{
-      display:grid; gap:6px;
-      font-size:14px;
+    /* ─── ÍNDICE ─── */
+    #indice .index-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    .kv div{
-      display:flex; gap:8px; align-items:baseline;
+    @media (max-width: 600px) { #indice .index-grid { grid-template-columns: 1fr; } }
+    .index-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius2);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .15s, background .15s, transform .12s;
     }
-    .kv .l{min-width:110px; color:var(--muted)}
-    .hr{height:1px;background:var(--border); margin:12px 0}
-    .pdf{
-      width:100%;
-      height:640px;
-      border:1px solid var(--border);
-      border-radius:var(--radius2);
-      background:rgba(0,0,0,.15);
+    .index-item:hover { border-color: var(--unab-red); background: #fff5f5; transform: translateY(-1px); }
+    .index-num { font-family: var(--mono); font-size: 11px; color: var(--text3); min-width: 28px; }
+    .index-text { font-size: 14px; }
+    .index-dot { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+
+    /* ─── INTRO / OBJETIVO ─── */
+    .prose p { font-size: 15.5px; color: var(--text2); margin-bottom: 14px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--text); }
+
+    .objetivo-box {
+      background: linear-gradient(135deg, #eef3ff, #f5f3ee);
+      border: 1.5px solid #c0cef0;
+      border-left: 5px solid var(--unab-blue);
+      border-radius: var(--radius2);
+      padding: 20px 24px;
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
     }
-    .dl{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-top:10px;
-    }
-    .dl a{
-      text-decoration:none;
-      border:1px solid var(--border);
-      padding:8px 10px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-    }
-    details{
-      border:1px solid var(--border);
-      border-radius:var(--radius2);
-      padding:10px 12px;
-      background:rgba(255,255,255,.02);
-    }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      font-weight:700;
-    }
-    summary::-webkit-details-marker{display:none}
-    .tag{
-      font-family:var(--mono);
-      font-size:12px;
-      padding:5px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      color:var(--muted);
-      background:rgba(255,255,255,.04);
-      font-weight:700;
-    }
-    .toTop{
-      position:fixed; right:18px; bottom:18px; z-index:60;
-      display:none;
-      cursor:pointer;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      background: linear-gradient(135deg, rgba(27,74,166,.22), rgba(214,31,31,.18));
-      color:var(--text);
+    .objetivo-box strong { color: var(--unab-navy); }
+
+    /* ─── SEMANA CARDS ─── */
+    .semana-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
       box-shadow: var(--shadow);
     }
-    .toTop.show{display:block}
-    /* Print */
-    @media print{
-      body{background:white;color:black}
-      .layout{grid-template-columns:1fr;padding:0}
-      .sidebar{display:none}
-      .main{box-shadow:none;border:none}
-      .topbar{position:static;background:white;color:black;border-bottom:1px solid #ddd}
-      .pdf{height:520px}
-      details{break-inside:avoid}
-      .card{break-inside:avoid}
-      .toTop{display:none!important}
+    .semana-header {
+      background: linear-gradient(90deg, var(--unab-navy), #1a3170);
+      color: #fff;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
+    .semana-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--unab-red);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .semana-title-text { font-family: var(--display); font-size: 18px; font-weight: 700; }
+    .semana-body { padding: 28px; display: flex; flex-direction: column; gap: 22px; }
+
+    /* PDF viewer block */
+    .pdf-block {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius2);
+      overflow: hidden;
+    }
+    .pdf-block-header {
+      background: var(--surface2);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .pdf-block-label { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+    .pdf-actions { display: flex; gap: 8px; }
+    .pdf-actions a {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      background: var(--surface);
+      transition: border-color .12s, color .12s;
+    }
+    .pdf-actions a:hover { border-color: var(--unab-blue); color: var(--unab-blue); }
+    .pdf-frame {
+      width: 100%;
+      height: 560px;
+      display: block;
+      background: #e8e4dc;
+      border: none;
+    }
+    .pdf-placeholder {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--surface2);
+      color: var(--text3);
+    }
+    .pdf-placeholder .icon { font-size: 36px; }
+    .pdf-placeholder p { font-size: 13px; text-align: center; }
+
+    /* Reflexión */
+    .reflexion-wrap {
+      border: 1.5px solid #dbeafe;
+      border-left: 5px solid var(--unab-blue);
+      border-radius: var(--radius2);
+      background: #f0f5ff;
+      overflow: hidden;
+    }
+    .reflexion-header {
+      background: #dbeafe;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .reflexion-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; color: var(--unab-navy); text-transform: uppercase; font-weight: 600; }
+    .reflexion-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--unab-red);
+      color: #fff;
+    }
+    .reflexion-body { padding: 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+    .reflexion-item {}
+    .reflexion-pregunta {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--unab-blue);
+      margin-bottom: 4px;
+    }
+    .reflexion-resp { font-size: 14.5px; color: var(--text2); line-height: 1.7; }
+    .reflexion-comparacion {
+      background: #e0ebff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--unab-navy);
+      line-height: 1.65;
+    }
+    .reflexion-comparacion strong { color: var(--unab-red); }
+
+    /* ─── RÚBRICA AUTOEVALUACIÓN ─── */
+    #rubrica table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    #rubrica th {
+      background: var(--unab-navy);
+      color: #fff;
+      padding: 10px 12px;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .5px;
+    }
+    #rubrica td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    #rubrica tr:nth-child(even) td { background: var(--surface2); }
+    #rubrica .crit { font-weight: 600; color: var(--unab-navy); }
+    #rubrica .pct { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+    .badge-10 { background: #d1fae5; color: #065f46; font-family: var(--mono); font-size: 12px; padding: 3px 8px; border-radius: 6px; font-weight: 700; }
+    .badge-8  { background: #dbeafe; color: #1e40af; font-family: var(--mono); font-size: 12px; padding: 3px 8px; border-radius: 6px; font-weight: 700; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      margin-top: 40px;
+      padding: 24px 40px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text3);
+      font-family: var(--mono);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ─── PRINT ─── */
+    @media print {
+      body { background: #fff; }
+      .topbar, .sidebar, footer .btn { display: none; }
+      .content { padding: 20px; }
+      .pdf-frame { height: 480px; }
+      .semana-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .card, .semana-card { animation: fadeUp .45s ease both; }
+    .card:nth-child(2) { animation-delay: .07s; }
+    .card:nth-child(3) { animation-delay: .14s; }
+    .semana-card:nth-child(1) { animation-delay: .06s; }
+    .semana-card:nth-child(2) { animation-delay: .12s; }
+    .semana-card:nth-child(3) { animation-delay: .18s; }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="brand">
-        <h1 class="t">UNAB · Portafolio<br><span class="muted">Evaluación Educativa</span></h1> 
+  <div class="wrapper">
+
+    <!-- ════ SIDEBAR ════ -->
+    <aside class="sidebar" aria-label="Navegación">
+      <div class="logo-block">
+        <div class="univ">Universidad Doctor Andrés Bello</div>
+        <div class="sigla">UNAB</div>
+        <div class="asig">Evaluación Educativa · G5</div>
       </div>
 
-      <nav class="nav" aria-label="Navegación del portafolio">
-        <a href="#portada"><span class="k"><span class="dot g"></span>Portada</span><span class="mini">01</span></a>
-        <a href="#introduccion"><span class="k"><span class="dot"></span>Introducción</span><span class="mini">02</span></a>
-        <a href="#objetivo"><span class="k"><span class="dot"></span>Objetivo</span><span class="mini">03</span></a>
-        <a href="#sem4"><span class="k"><span class="dot r"></span>Semana 4</span><span class="mini">04</span></a>
-        <a href="#sem5"><span class="k"><span class="dot r"></span>Semana 5</span><span class="mini">05</span></a>
-        <a href="#sem6"><span class="k"><span class="dot r"></span>Semana 6</span><span class="mini">06</span></a>
+      <div class="progress-wrap">
+        <div class="progress-label">Progreso de lectura</div>
+        <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      </div>
+
+      <nav aria-label="Secciones del portafolio">
+        <div class="nav-label">Contenido</div>
+        <ul>
+          <li><a href="#portada"><span>Portada</span><span class="num">01</span></a></li>
+          <li><a href="#indice"><span>Índice</span><span class="num">02</span></a></li>
+          <li><a href="#introduccion"><span>Introducción</span><span class="num">03</span></a></li>
+          <li><a href="#objetivo"><span>Objetivo</span><span class="num">04</span></a></li>
+          <li><a href="#sem4"><span>Semana 4</span><span class="num">05</span></a></li>
+          <li><a href="#sem5"><span>Semana 5</span><span class="num">06</span></a></li>
+          <li><a href="#sem6"><span>Semana 6</span><span class="num">07</span></a></li>
+          <!--<li><a href="#rubrica"><span>Autoevaluación</span><span class="num">08</span></a></li>-->
+        </ul>
       </nav>
-         
+
+      <div class="sidebar-meta">
+        Portafolio de Evidencias<br>
+        Segundo Laboratorio y Parcial<br>
+        Ciclo 2026 · El Salvador
+      </div>
     </aside>
 
-    <main class="main" id="main">
+    <!-- ════ MAIN ════ -->
+    <main>
       <div class="topbar">
-        <div class="left">
-          <div class="title">PORTAFOLIO DE EVIDENCIAS – EVALUACIÓN EDUCATIVA</div>
-          <div class="sub">Luis Roberto Garcia Zaña · UNAB · Docente: Liliana Jeannette Cordero de García</div>
-        </div>
-        <div class="right">
-          <div class="progress" aria-label="Progreso de lectura"><div class="bar" id="bar"></div></div>
-          <button class="btn primary" onclick="window.print()">Guardar en PDF</button>
+        <span class="topbar-title">PORTAFOLIO · EVALUACIÓN EDUCATIVA · UNAB</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn print" onclick="window.print()">⊞ Imprimir / PDF</button>
         </div>
       </div>
 
       <div class="content">
-        <!-- PORTADA -->
-        <section class="card" id="portada">
-          <h2>Portada</h2>
-          <div class="grid2">
-            <div class="kv">
-              <div><span class="l">Estudiante:</span><span>Luis Roberto Garcia Zaña</span></div>
-              <div><span class="l">Universidad:</span><span>UNIVERSIDAD DOCTOR ANDRÉS BELLO</span></div>
-              <div><span class="l">Asignatura:</span><span>Evaluación Educativa</span></div>
-              <div><span class="l">Docente:</span><span>Liliana Jeannette Cordero de García</span></div>
-              <div><span class="l">Grupo:</span><span>G5</span></div>
-              <div><span class="l">Lugar/Fecha:</span><span>Sonsonate, 05/03/2026</span></div>
-            </div>
-            <div>
-              <h3 class="muted" style="margin:0 0 6px">Título</h3>
-              <div style="font-weight:800; font-size:16px; line-height:1.3">
-                Evidencias de mi aprendizaje: planificación e instrumentos de evaluación (Semanas 4–6)
+
+        <!-- ══ 01 PORTADA ══ -->
+        <section id="portada">
+          <div class="section-header">
+            <span class="section-num navy">01</span>
+            <h2 class="section-title">Portada</h2>
+          </div>
+          <div class="portada-hero">
+            <div class="hero-inner">
+              <div class="hero-univ">Universidad Doctor Andrés Bello · El Salvador</div>
+              <h1 class="hero-title">Evidencias de mi aprendizaje:<br>Planificación e Instrumentos de Evaluación</h1>
+              <p class="hero-subtitle">Portafolio de Trabajo — Evaluación Educativa (Semanas 4–6)</p>
+              <div class="hero-divider"></div>
+              <div class="meta-grid">
+                <div class="meta-item">
+                  <div class="meta-label">Estudiante</div>
+                  <div class="meta-value">Luis Roberto Garcia Zaña</div>
+                </div>
+                <div class="meta-item">
+                  <div class="meta-label">Asignatura</div>
+                  <div class="meta-value">Evaluación Educativa</div>
+                </div>
+                <div class="meta-item">
+                  <div class="meta-label">Docente</div>
+                  <div class="meta-value">Liliana Jeannette Cordero de García</div>
+                </div>
+                <div class="meta-item">
+                  <div class="meta-label">Grupo</div>
+                  <div class="meta-value">G5</div>
+                </div>
+                <div class="meta-item">
+                  <div class="meta-label">Lugar</div>
+                  <div class="meta-value">Sonsonate, El Salvador</div>
+                </div>
+                <div class="meta-item">
+                  <div class="meta-label">Fecha</div>
+                  <div class="meta-value">05 de marzo de 2026</div>
+                </div>
               </div>
-              <div class="hr"></div> 
             </div>
           </div>
         </section>
 
-        <!-- INTRODUCCIÓN -->
-        <section class="card" id="introduccion">
-            <h2>Introducción</h2>
-            <p>
-                El presente <strong>Portafolio de Evidencias</strong> reúne los trabajos desarrollados en las
-                <strong>semanas 4, 5 y 6</strong> de la asignatura <strong>Evaluación Educativa</strong>.
-                Su finalidad es demostrar, de manera organizada, el aprendizaje alcanzado sobre la <strong>planificación de la evaluación</strong> la selección de
-                <strong>técnicas e instrumentos</strong>, y el diseño de pruebas como la <strong>prueba objetiva</strong>, la <strong>tabla de especificaciones</strong>, el <strong>ensayo</strong> y la <strong>evaluación del desempeño</strong>.
-            </p>
-            <p>
-                Cada sección incluye el documento de trabajo (PDF) correspondiente y una reflexión que describe lo aprendido, identifica oportunidades de mejora y establece una comparación con situaciones similares, con el propósito de fortalecer la práctica evaluativa en contextos de educación superior.
-            </p>
+        <!-- ══ 02 ÍNDICE ══ -->
+        <section id="indice" class="card">
+          <div class="section-header">
+            <span class="section-num blue">02</span>
+            <h2 class="section-title">Índice</h2>
+          </div>
+          <div class="index-grid">
+            <a href="#portada" class="index-item">
+              <span class="index-num">01</span>
+              <span class="index-text">Portada</span>
+              <span class="index-dot"></span>
+            </a>
+            <a href="#indice" class="index-item">
+              <span class="index-num">02</span>
+              <span class="index-text">Índice</span>
+              <span class="index-dot"></span>
+            </a>
+            <a href="#introduccion" class="index-item">
+              <span class="index-num">03</span>
+              <span class="index-text">Introducción</span>
+              <span class="index-dot"></span>
+            </a>
+            <a href="#objetivo" class="index-item">
+              <span class="index-num">04</span>
+              <span class="index-text">Objetivo del portafolio</span>
+              <span class="index-dot"></span>
+            </a>
+            <a href="#sem4" class="index-item">
+              <span class="index-num">05</span>
+              <span class="index-text">Semana 4 — Estrategias e Instrumento de evaluación</span>
+              <span class="index-dot"></span>
+            </a>
+            <a href="#sem5" class="index-item">
+              <span class="index-num">06</span>
+              <span class="index-text">Semana 5 — Prueba objetiva y tabla de especificaciones</span>
+              <span class="index-dot"></span>
+            </a>
+            <a href="#sem6" class="index-item">
+              <span class="index-num">07</span>
+              <span class="index-text">Semana 6 — Prueba de ensayo y prueba de actuación</span>
+              <span class="index-dot"></span>
+            </a>
+            <!--<a href="#rubrica" class="index-item">
+              <span class="index-num">08</span>
+              <span class="index-text">Autoevaluación según rúbrica</span>
+              <span class="index-dot"></span>
+            </a>-->
+          </div>
         </section>
 
-        <!-- OBJETIVO -->
-        <section class="card" id="objetivo">
-          <h2>Objetivo del portafolio</h2>
-          <p>
+        <!-- ══ 03 INTRODUCCIÓN ══ -->
+        <section id="introduccion" class="card">
+          <div class="section-header">
+            <span class="section-num blue">03</span>
+            <h2 class="section-title">Introducción</h2>
+          </div>
+          <div class="prose">
+            <p>
+              El presente <strong>Portafolio de Evidencias</strong> recopila los trabajos desarrollados en las
+              <strong>semanas 4, 5 y 6</strong> de la asignatura <strong>Evaluación Educativa</strong> en la
+              <strong>Universidad Doctor Andrés Bello (UNAB)</strong>. Su finalidad es demostrar, de manera organizada,
+              el aprendizaje alcanzado sobre la <strong>planificación de la evaluación</strong>, la selección de
+              <strong>técnicas e instrumentos</strong>, y el diseño de evaluaciones como la
+              <strong>prueba objetiva</strong>, la <strong>tabla de especificaciones</strong>, el <strong>ensayo</strong>
+              y la <strong>evaluación del desempeño</strong>.
+            </p>
+            <p>
+              El portafolio sigue la secuencia establecida: portada, índice, introducción, objetivo y los elementos
+              de evidencia de cada semana. Cada sección incluye el <strong>documento de trabajo (PDF)</strong>
+              correspondiente y una <strong>reflexión</strong> que describe lo aprendido, identifica oportunidades
+              de mejora y establece comparaciones con situaciones análogas, con el propósito de fortalecer la práctica
+              evaluativa en contextos de educación superior.
+            </p>
+            <p>
+              Este instrumento refleja el proceso formativo vivido durante las tres semanas trabajadas y proyecta
+              metas de mejora continua en la labor docente del autor.
+            </p>
+          </div>
+        </section>
+
+        <!-- ══ 04 OBJETIVO ══ -->
+        <section id="objetivo" class="card">
+          <div class="section-header">
+            <span class="section-num gold">04</span>
+            <h2 class="section-title">Objetivo del portafolio</h2>
+          </div>
+          <div class="objetivo-box">
             Presentar de forma organizada las evidencias y reflexiones correspondientes a las semanas 4, 5 y 6,
             demostrando el dominio de estrategias, instrumentos y pruebas de evaluación educativa:
-            <strong>Semana 4</strong> (estrategias e instrumentos),
+            <strong>Semana 4</strong> (estrategias e instrumentos de evaluación),
             <strong>Semana 5</strong> (prueba objetiva y tabla de especificaciones) y
-            <strong>Semana 6</strong> (ensayo y actuación/desempeño con lista de cotejo/escala).
+            <strong>Semana 6</strong> (prueba de ensayo y prueba de actuación/desempeño con lista de cotejo y/o
+            escala de calificación), con el fin de evidenciar el aprendizaje obtenido en cada unidad temática
+            y fortalecer la práctica docente evaluativa.
+          </div>
+        </section>
+
+        <!-- ══ 05 SEMANA 4 ══ -->
+        <section id="sem4">
+          <div class="section-header">
+            <span class="section-num">05</span>
+            <h2 class="section-title">Semana 4 — Estrategias e Instrumento de evaluación</h2>
+          </div>
+          <div class="semana-card">
+            <div class="semana-header">
+              <span class="semana-badge">Semana 4</span>
+              <span class="semana-title-text">Estrategias e Instrumento de evaluación</span>
+            </div>
+            <div class="semana-body">
+              <!-- PDF -->
+              <div class="pdf-block">
+                <div class="pdf-block-header">
+                  <span class="pdf-block-label">📄 Trabajo de la Semana 4 (PDF)</span>
+                  <div class="pdf-actions">
+                    <a href="archivos/semana4.pdf" target="_blank" rel="noopener">Abrir</a>
+                    <a href="archivos/semana4.pdf" download>Descargar</a>
+                  </div>
+                </div>
+                <iframe class="pdf-frame" src="archivos/semana4.pdf" title="Semana 4 — Estrategias e Instrumento de evaluación"></iframe>
+              </div>
+              <!-- Reflexión -->
+              <div class="reflexion-wrap">
+                <div class="reflexion-header">
+                  <span class="reflexion-label">Reflexión</span> 
+                </div>
+                <div class="reflexion-body">
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué aprendí?</div>
+                    <div class="reflexion-resp">Aprendí a distinguir técnicas no formales, semiformales y formales, y a seleccionar instrumentos coherentes con cada técnica: observación, análisis de producciones, intercambios orales y pruebas. Comprendí que la estrategia es un conjunto integrado: <em>actividad + técnica + instrumento</em>.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué se me facilitó?</div>
+                    <div class="reflexion-resp">Comprender la estrategia como sistema ordenado me facilitó el diseño de evaluaciones más coherentes y alineadas con los aprendizajes esperados.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
+                    <div class="reflexion-resp">Justificar mejor la elección del instrumento según el tipo de aprendizaje (saber/saber hacer/saber ser) y redactar indicadores más observables y precisos.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">Proyección / Aplicación</div>
+                    <div class="reflexion-resp">Diseñaré evaluaciones centradas en evidencias con retroalimentación formativa estructurada: qué hizo bien, qué puede mejorar y cuáles son los próximos pasos.</div>
+                  </div>
+                  <div class="reflexion-comparacion">
+                    <strong>Comparación con situación análoga:</strong> En una evaluación de una actividad de clase, si se utiliza únicamente una prueba escrita se pierden evidencias del desempeño real del estudiante. Combinando técnica e instrumento adecuados se valora de forma más integral el proceso de aprendizaje y no solo el producto final.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══ 06 SEMANA 5 ══ -->
+        <section id="sem5">
+          <div class="section-header">
+            <span class="section-num">06</span>
+            <h2 class="section-title">Semana 5 — Prueba objetiva y Tabla de especificaciones</h2>
+          </div>
+          <div class="semana-card">
+            <div class="semana-header">
+              <span class="semana-badge">Semana 5</span>
+              <span class="semana-title-text">Prueba objetiva y Tabla de especificaciones</span>
+            </div>
+            <div class="semana-body">
+              <div class="pdf-block">
+                <div class="pdf-block-header">
+                  <span class="pdf-block-label">📄 Trabajo de la Semana 5 (PDF)</span>
+                  <div class="pdf-actions">
+                    <a href="archivos/semana5.pdf" target="_blank" rel="noopener">Abrir</a>
+                    <a href="archivos/semana5.pdf" download>Descargar</a>
+                  </div>
+                </div>
+                <iframe class="pdf-frame" src="archivos/semana5.pdf" title="Semana 5 — Prueba objetiva y Tabla de especificaciones"></iframe>
+              </div>
+              <div class="reflexion-wrap">
+                <div class="reflexion-header">
+                  <span class="reflexion-label">Reflexión</span> 
+                </div>
+                <div class="reflexion-body">
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué aprendí?</div>
+                    <div class="reflexion-resp">Comprendí la tríada fundamental de la evaluación (objeto–tarea–criterios) y que una prueba objetiva debe construirse con preguntas claras y criterios definidos para garantizar objetividad y validez del instrumento.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué fue lo más importante?</div>
+                    <div class="reflexion-resp">La <strong>tabla de especificaciones</strong> como control de calidad, porque garantiza que la prueba mida lo que se desea medir y mantiene el equilibrio entre contenidos y dominios cognitivos (conocer, comprender, aplicar, analizar).</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
+                    <div class="reflexion-resp">Seleccionar mejor el tipo de ítem según el dominio cognitivo (comprensión, análisis, aplicación) y construir siempre la tabla de especificaciones antes de redactar los reactivos.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">Proyección / Aplicación</div>
+                    <div class="reflexion-resp">En futuras pruebas, partiré de objetivos y competencias, elaboraré la tabla de especificaciones y luego diseñaré ítems con puntaje acorde a la complejidad de cada nivel cognitivo.</div>
+                  </div>
+                  <div class="reflexion-comparacion">
+                    <strong>Comparación con situación análoga:</strong> En el diseño de un examen de otra unidad temática, cuando no se utiliza tabla de especificaciones la prueba tiende a desbalancearse en cuanto a contenidos y niveles. Con la tabla se garantiza cobertura curricular y validez del contenido evaluado.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══ 07 SEMANA 6 ══ -->
+        <section id="sem6">
+          <div class="section-header">
+            <span class="section-num">07</span>
+            <h2 class="section-title">Semana 6 — Prueba de ensayo y Prueba de actuación/desempeño</h2>
+          </div>
+          <div class="semana-card">
+            <div class="semana-header">
+              <span class="semana-badge">Semana 6</span>
+              <span class="semana-title-text">Prueba de ensayo y Prueba de actuación/desempeño</span>
+            </div>
+            <div class="semana-body">
+              <div class="pdf-block">
+                <div class="pdf-block-header">
+                  <span class="pdf-block-label">📄 Trabajo de la Semana 6 (PDF)</span>
+                  <div class="pdf-actions">
+                    <a href="archivos/semana6.pdf" target="_blank" rel="noopener">Abrir</a>
+                    <a href="archivos/semana6.pdf" download>Descargar</a>
+                  </div>
+                </div>
+                <iframe class="pdf-frame" src="archivos/semana6.pdf" title="Semana 6 — Prueba de ensayo y actuación"></iframe>
+              </div>
+              <div class="reflexion-wrap">
+                <div class="reflexion-header">
+                  <span class="reflexion-label">Reflexión</span> 
+                </div>
+                <div class="reflexion-body">
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué aprendí?</div>
+                    <div class="reflexion-resp">El ensayo evalúa procesos mentales superiores (síntesis, análisis, criticidad y argumentación) pero requiere criterios claros para reducir la subjetividad. La prueba de actuación evalúa desempeño real y exige planificar: competencia, tarea auténtica, indicadores e instrumento (lista de cotejo o escala).</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué se me facilitó?</div>
+                    <div class="reflexion-resp">Construir listas de cotejo y escalas de calificación cuando los indicadores se redactan como conductas observables, medibles y verificables.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
+                    <div class="reflexion-resp">Estandarizar la calificación de ensayos utilizando una rúbrica con descriptores por nivel para aumentar la confiabilidad y reducir la variabilidad en la corrección.</div>
+                  </div>
+                  <div class="reflexion-item">
+                    <div class="reflexion-pregunta">Proyección / Aplicación</div>
+                    <div class="reflexion-resp">Combinaré evaluación escrita (ensayo) con evaluación auténtica (desempeño), promoviendo la autoevaluación y la retroalimentación continua como parte del proceso formativo.</div>
+                  </div>
+                  <div class="reflexion-comparacion">
+                    <strong>Comparación con situación análoga:</strong> En la evaluación de proyectos de fin de ciclo, un ensayo por sí solo no evidencia las habilidades prácticas del estudiante. Al incorporar una prueba de desempeño con lista de cotejo, se observa la aplicación real de los aprendizajes y se mejora significativamente la confiabilidad de la evaluación.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══ 08 AUTOEVALUACIÓN ══ -->
+        <!--<section id="rubrica" class="card">
+          <div class="section-header">
+            <span class="section-num blue">08</span>
+            <h2 class="section-title">Autoevaluación según rúbrica</h2>
+          </div>
+          <p style="font-size:14px;color:var(--text3);margin-bottom:18px;">
+            Verificación de cumplimiento de los criterios establecidos en la rúbrica oficial del portafolio.
           </p>
-        </section>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Criterio</th>
+                  <th>% Peso</th>
+                  <th>Nivel alcanzado</th>
+                  <th>Descripción del cumplimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="crit">Portada</td>
+                  <td class="pct">1 %</td>
+                  <td><span class="badge-10">MUY BIEN · 10</span></td>
+                  <td>Incluye nombre del autor, institución, asignatura, título sugerente, fecha y lugar (Sonsonate, 05/03/2026).</td>
+                </tr>
+                <tr>
+                  <td class="crit">Objetivo</td>
+                  <td class="pct">1 %</td>
+                  <td><span class="badge-10">MUY BIEN · 10</span></td>
+                  <td>El objetivo es congruente con los contenidos de las tres semanas y especifica los aprendizajes obtenidos.</td>
+                </tr>
+                <tr>
+                  <td class="crit">Evidencias</td>
+                  <td class="pct">3 %</td>
+                  <td><span class="badge-10">MUY BIEN · 10</span></td>
+                  <td>Incluye los 3 tipos de evidencias solicitadas (semanas 4, 5 y 6) con visor PDF y acceso a descarga.</td>
+                </tr>
+                <tr>
+                  <td class="crit">Organización</td>
+                  <td class="pct">1 %</td>
+                  <td><span class="badge-10">MUY BIEN · 10</span></td>
+                  <td>Todos los documentos tienen encabezado (badge + título), son claros, limpios y explicativos. Incluye índice navegable.</td>
+                </tr>
+                <tr>
+                  <td class="crit">Reflexión</td>
+                  <td class="pct">3 %</td>
+                  <td><span class="badge-10">MUY BIEN · 10</span></td>
+                  <td>Las reflexiones describen la actividad, analizan el aprendizaje, valoran el resultado y establecen comparaciones con situaciones análogas.</td>
+                </tr>
+                <tr>
+                  <td class="crit">Ortografía</td>
+                  <td class="pct">1 %</td>
+                  <td><span class="badge-10">MUY BIEN · 10</span></td>
+                  <td>El portafolio ha sido revisado sin errores ortográficos detectados.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>-->
 
-        <!-- SEMANA 4 -->
-        <section class="card" id="sem4">
-          <h2>Semana 4 – Estrategias e Instrumento de evaluación</h2>
-          <details open>
-            <summary>Trabajo de la semana</summary>
-            <div style="margin-top:10px">
-              <iframe class="pdf" src="archivos/semana4.pdf" title="Semana 4 (PDF)"></iframe>
-              <div class="dl">
-                <a href="archivos/semana4.pdf" target="_blank" rel="noopener">Abrir en pestaña</a>
-                <a href="archivos/semana4.pdf" download>Descargar PDF</a>
-              </div>
-            </div>
-          </details>
+      </div><!-- /content -->
 
-          <details open>
-            <summary>Reflexión</summary>
-            <div style="margin-top:10px; line-height:1.6">
-              <p><strong>¿Qué aprendí?</strong> Aprendí a distinguir técnicas no formales, semiformales y formales, y a seleccionar instrumentos coherentes con la técnica (observación, análisis de producciones, intercambios orales y pruebas).</p>
-              <p><strong>¿Qué se me facilitó?</strong> Comprender la estrategia como un conjunto: <em>actividad + técnica + instrumento</em>, porque ordena el diseño de la evaluación.</p>
-              <p><strong>¿Qué debo mejorar?</strong> Justificar mejor la elección del instrumento según el aprendizaje esperado (saber/saber hacer/saber ser) y redactar indicadores más observables.</p>
-              <p><strong>Aplicación:</strong> Diseñaré evaluaciones centradas en evidencias, con retroalimentación formativa (qué hizo bien, qué mejorar y próximos pasos).</p>
-            
-              <p><strong>Comparación:</strong> En una situación similar (evaluación de una actividad de clase), si uso solo una prueba escrita pierdo evidencias del desempeño; por eso, combinar técnica e instrumento me permite valorar mejor el proceso.</p>
-</div>
-          </details>
-        </section>
-
-        <!-- SEMANA 5 -->
-        <section class="card" id="sem5">
-          <h2>Semana 5 – Prueba objetiva y Tabla de especificaciones</h2>
-          <details open>
-            <summary>Trabajo de la semana</summary>
-            <div style="margin-top:10px">
-              <iframe class="pdf" src="archivos/semana5.pdf" title="Semana 5 (PDF)"></iframe>
-              <div class="dl">
-                <a href="archivos/semana5.pdf" target="_blank" rel="noopener">Abrir en pestaña</a>
-                <a href="archivos/semana5.pdf" download>Descargar PDF</a>
-              </div>
-            </div>
-          </details>
-
-          <details open>
-            <summary>Reflexión</summary>
-            <div style="margin-top:10px; line-height:1.6">
-              <p><strong>¿Qué aprendí?</strong> Comprendí la tríada (objeto–tarea–criterios) y que una prueba objetiva debe construirse con preguntas claras y criterios definidos para asegurar objetividad y validez.</p>
-              <p><strong>¿Qué fue lo más importante?</strong> La <strong>tabla de especificaciones</strong> como control de calidad, porque garantiza que la prueba mida lo que se desea medir y mantiene el equilibrio entre contenidos y dominios cognitivos.</p>
-              <p><strong>¿Qué debo mejorar?</strong> Seleccionar mejor el tipo de ítem según el dominio (comprensión, análisis, aplicación) y elaborar primero la tabla antes de redactar reactivos.</p>
-              <p><strong>Aplicación:</strong> En futuras pruebas, partiré de objetivos/competencias, construiré la tabla y luego diseñaré ítems con puntaje acorde a la complejidad.</p>
-            
-              <p><strong>Comparación:</strong> En una situación análoga (examen de otra unidad), sin tabla de especificaciones la prueba tiende a desbalancearse; con la tabla se garantiza cobertura y validez del contenido.</p>
-</div>
-          </details>
-        </section>
-
-        <!-- SEMANA 6 -->
-        <section class="card" id="sem6">
-          <h2>Semana 6 – Prueba de ensayo y Prueba de actuación/desempeño</h2>
-          <details open>
-            <summary>Trabajo de la semana</summary>
-            <div style="margin-top:10px">
-              <iframe class="pdf" src="archivos/semana6.pdf" title="Semana 6 (PDF)"></iframe>
-              <div class="dl">
-                <a href="archivos/semana6.pdf" target="_blank" rel="noopener">Abrir en pestaña</a>
-                <a href="archivos/semana6.pdf" download>Descargar PDF</a>
-              </div>
-            </div>
-          </details>
-
-          <details open>
-            <summary>Reflexión</summary>
-            <div style="margin-top:10px; line-height:1.6">
-              <p><strong>¿Qué aprendí?</strong> El ensayo evalúa procesos mentales superiores (síntesis, análisis, criticidad y argumentación), pero necesita criterios claros para reducir subjetividad. La prueba de actuación evalúa desempeño real y exige planificar competencia, tarea, indicadores e instrumento.</p>
-              <p><strong>¿Qué se me facilitó?</strong> Construir listas de cotejo y escalas cuando los indicadores se redactan como conductas observables y medibles.</p>
-              <p><strong>¿Qué debo mejorar?</strong> Estandarizar la calificación de ensayos usando una escala/rúbrica con descriptores por nivel para aumentar confiabilidad.</p>
-              <p><strong>Aplicación:</strong> Combinaré evaluación escrita (ensayo) con evaluación auténtica (desempeño), promoviendo autoevaluación y retroalimentación continua.</p>
-            
-              <p><strong>Comparación:</strong> En una situación similar (evaluación de proyectos), un ensayo por sí solo no evidencia habilidades prácticas; al agregar desempeño con lista de cotejo se observa aplicación real y se mejora la confiabilidad.</p>
-</div>
-          </details>
-        </section>
-
-        <section class="card" aria-label="Cierre"> 
-          <p class="muted" style="margin:0">
-            Si el visor PDF no carga (por políticas del navegador), usa “Abrir en pestaña” o “Descargar PDF”.
-          </p>
-        </section>
-
-      </div>
+      <footer>
+        <span>Luis Roberto Garcia Zaña · UNAB · Evaluación Educativa G5 · 2026</span>
+        <button class="btn print" onclick="window.print()">⊞ Guardar como PDF</button>
+      </footer>
     </main>
-  </div>
 
-  <button class="toTop" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Inicio</button>
+  </div><!-- /wrapper -->
 
   <script>
-    // Scroll progress
-    const bar = document.getElementById("bar");
-    const toTop = document.getElementById("toTop");
-    function updateProgress(){
-      const h = document.documentElement;
-      const scrolled = (h.scrollTop || document.body.scrollTop);
-      const height = (h.scrollHeight - h.clientHeight);
-      const pct = height > 0 ? (scrolled/height)*100 : 0;
-      if(bar) bar.style.width = pct.toFixed(1) + "%";
-      if(toTop){
-        if(scrolled > 450) toTop.classList.add("show");
-        else toTop.classList.remove("show");
-      }
+    // Progress bar
+    const fill = document.getElementById('progFill');
+    function updateProgress() {
+      const el = document.documentElement;
+      const scrolled = el.scrollTop || document.body.scrollTop;
+      const total = el.scrollHeight - el.clientHeight;
+      if (fill) fill.style.width = (total > 0 ? (scrolled / total) * 100 : 0).toFixed(1) + '%';
     }
-    window.addEventListener("scroll", updateProgress, {passive:true});
+    window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
 
-    // Active nav highlight
-    const sections = ["#portada","#introduccion","#objetivo","#sem4","#sem5","#sem6"]
-      .map(id => document.querySelector(id));
-    const links = Array.from(document.querySelectorAll(".nav a"));
-    const linkMap = new Map(links.map(a => [a.getAttribute("href"), a]));
-
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          links.forEach(a=>a.classList.remove("active"));
-          const href = "#" + e.target.id;
-          const l = linkMap.get(href);
-          if(l) l.classList.add("active");
+    // Active nav
+    const navLinks = Array.from(document.querySelectorAll('nav a'));
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const a = navLinks.find(a => a.getAttribute('href') === '#' + e.target.id);
+          if (a) a.classList.add('active');
         }
       });
-    }, {threshold:0.45});
-
-    sections.filter(Boolean).forEach(s=> io.observe(s));
+    }, { threshold: 0.35 });
+    sections.forEach(s => io.observe(s));
   </script>
 </body>
 </html>
