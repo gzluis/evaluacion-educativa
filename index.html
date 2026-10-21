@@ -1,1437 +1,416 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Portafolio de Evidencias – Evaluación Educativa · UNAB</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --unab-navy: #0a1a3d;
-            --unab-blue: #1040a0;
-            --unab-red: #c8202a;
-            --unab-gold: #c9940a;
-            --bg: #f5f3ee;
-            --surface: #ffffff;
-            --surface2: #f0ede6;
-            --border: #ddd8ce;
-            --text: #1a1510;
-            --text2: #5a5248;
-            --text3: #8a8278;
-            --radius: 16px;
-            --radius2: 10px;
-            --shadow: 0 4px 24px rgba(10,26,61,.10);
-            --shadow2: 0 2px 8px rgba(10,26,61,.07);
-            --serif: 'Source Serif 4', Georgia, serif;
-            --display: 'Playfair Display', Georgia, serif;
-            --mono: 'JetBrains Mono', monospace;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--serif);
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text);
-            background: var(--bg);
-            min-height: 100vh;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        .wrapper {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 100vh;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 900px) {
-            .wrapper {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .sidebar {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            background: var(--unab-navy);
-            color: #e8e4dc;
-            padding: 32px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-            border-right: 3px solid var(--unab-red);
-        }
-
-        @media (max-width: 900px) {
-            .sidebar {
-                position: static;
-                height: auto;
-                flex-direction: row;
-                flex-wrap: wrap;
-                padding: 16px;
-                gap: 16px;
-            }
-        }
-
-        .logo-block {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,.12);
-        }
-
-            .logo-block .univ {
-                font-family: var(--display);
-                font-size: 13px;
-                letter-spacing: 1.5px;
-                text-transform: uppercase;
-                color: var(--unab-gold);
-            }
-
-            .logo-block .sigla {
-                font-family: var(--display);
-                font-size: 52px;
-                font-weight: 900;
-                line-height: 1;
-                color: #fff;
-                letter-spacing: -2px;
-            }
-
-            .logo-block .asig {
-                font-size: 12px;
-                color: rgba(255,255,255,.5);
-                margin-top: 4px;
-                letter-spacing: .5px;
-            }
-
-        .progress-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .progress-label {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: rgba(255,255,255,.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .progress-bar {
-            height: 4px;
-            background: rgba(255,255,255,.12);
-            border-radius: 99px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--unab-blue), var(--unab-red));
-            transition: width .2s;
-        }
-
-        nav .nav-label {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,.35);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-            nav ul li a {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 8px;
-                padding: 9px 12px;
-                border-radius: var(--radius2);
-                text-decoration: none;
-                color: rgba(255,255,255,.65);
-                font-size: 13.5px;
-                transition: background .15s, color .15s;
-            }
-
-                nav ul li a:hover {
-                    background: rgba(255,255,255,.07);
-                    color: #fff;
-                }
-
-                nav ul li a.active {
-                    background: rgba(200,32,42,.25);
-                    color: #fff;
-                    border-left: 3px solid var(--unab-red);
-                }
-
-                nav ul li a .num {
-                    font-family: var(--mono);
-                    font-size: 11px;
-                    color: rgba(255,255,255,.3);
-                }
-
-        .sidebar-meta {
-            margin-top: auto;
-            font-size: 12px;
-            color: rgba(255,255,255,.3);
-            line-height: 1.5;
-            border-top: 1px solid rgba(255,255,255,.08);
-            padding-top: 16px;
-        }
-
-        main {
-            padding: 0 0 80px;
-        }
-
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            background: rgba(245,243,238,.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .topbar-title {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--text3);
-            letter-spacing: .5px;
-        }
-
-        .btn {
-            cursor: pointer;
-            border: 1.5px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            padding: 7px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: var(--mono);
-            transition: border-color .15s, background .15s;
-        }
-
-            .btn:hover {
-                border-color: var(--unab-red);
-                background: #fff5f5;
-            }
-
-            .btn.print {
-                background: var(--unab-navy);
-                color: #fff;
-                border-color: var(--unab-navy);
-            }
-
-                .btn.print:hover {
-                    background: var(--unab-blue);
-                }
-
-        .content {
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 36px;
-        }
-
-        @media (max-width: 700px) {
-            .content {
-                padding: 20px;
-            }
-
-            .topbar {
-                padding: 10px 20px;
-            }
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 24px;
-        }
-
-        .section-num {
-            font-family: var(--mono);
-            font-size: 11px;
-            font-weight: 600;
-            color: #fff;
-            background: var(--unab-red);
-            padding: 4px 9px;
-            border-radius: 6px;
-            letter-spacing: 1px;
-            flex-shrink: 0;
-        }
-
-            .section-num.blue {
-                background: var(--unab-blue);
-            }
-
-            .section-num.navy {
-                background: var(--unab-navy);
-            }
-
-            .section-num.gold {
-                background: var(--unab-gold);
-            }
-
-        .section-title {
-            font-family: var(--display);
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--unab-navy);
-            line-height: 1.2;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            box-shadow: var(--shadow);
-        }
-
-        #portada .portada-hero {
-            background: linear-gradient(135deg, var(--unab-navy) 0%, #1a3170 60%, #2a0a0d 100%);
-            border-radius: var(--radius);
-            padding: 48px 40px;
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-        }
-
-            #portada .portada-hero::before {
-                content: '';
-                position: absolute;
-                top: -60px;
-                right: -60px;
-                width: 300px;
-                height: 300px;
-                border-radius: 50%;
-                background: radial-gradient(circle, rgba(200,32,42,.25) 0%, transparent 70%);
-            }
-
-            #portada .portada-hero::after {
-                content: '';
-                position: absolute;
-                bottom: -40px;
-                left: -40px;
-                width: 240px;
-                height: 240px;
-                border-radius: 50%;
-                background: radial-gradient(circle, rgba(16,64,160,.3) 0%, transparent 70%);
-            }
-
-        #portada .hero-inner {
-            position: relative;
-            z-index: 1;
-        }
-
-        #portada .hero-univ {
-            font-family: var(--mono);
-            font-size: 14px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--unab-gold);
-            margin-bottom: 20px;
-        }
-
-        #portada .hero-title {
-            font-family: var(--display);
-            font-size: clamp(22px, 4vw, 36px);
-            font-weight: 900;
-            line-height: 1.15;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        #portada .hero-subtitle {
-            font-family: var(--display);
-            font-style: italic;
-            font-size: clamp(14px, 2vw, 18px);
-            color: rgba(255,255,255,.7);
-            margin-bottom: 28px;
-        }
-
-        #portada .hero-divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--unab-red), var(--unab-gold));
-            border-radius: 2px;
-            margin-bottom: 28px;
-        }
-
-        #portada .meta-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 24px;
-        }
-
-        @media (max-width: 600px) {
-            #portada .meta-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        #portada .meta-item {
-            font-size: 13px;
-        }
-
-        #portada .meta-label {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,.4);
-        }
-
-        #portada .meta-value {
-            color: rgba(255,255,255,.92);
-            font-weight: 400;
-        }
-        .logo-portada-wrap {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.96);
-            padding: 12px 18px;
-            border-radius: 14px;
-            margin-bottom: 18px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
-        }
-
-        .logo-portada {
-            max-width: 240px;
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        #indice .index-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        @media (max-width: 600px) {
-            #indice .index-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .index-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius2);
-            text-decoration: none;
-            color: var(--text);
-            transition: border-color .15s, background .15s, transform .12s;
-        }
-
-            .index-item:hover {
-                border-color: var(--unab-red);
-                background: #fff5f5;
-                transform: translateY(-1px);
-            }
-
-        .index-num {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--text3);
-            min-width: 28px;
-        }
-
-        .index-text {
-            font-size: 14px;
-        }
-
-        .index-dot {
-            margin-left: auto;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-        }
-
-        .prose p {
-            font-size: 15.5px;
-            color: var(--text2);
-            margin-bottom: 14px;
-        }
-
-            .prose p:last-child {
-                margin-bottom: 0;
-            }
-
-        .prose strong {
-            color: var(--text);
-        }
-
-        .objetivo-box {
-            background: linear-gradient(135deg, #eef3ff, #f5f3ee);
-            border: 1.5px solid #c0cef0;
-            border-left: 5px solid var(--unab-blue);
-            border-radius: var(--radius2);
-            padding: 20px 24px;
-            font-size: 15px;
-            color: var(--text2);
-            line-height: 1.75;
-        }
-
-            .objetivo-box strong {
-                color: var(--unab-navy);
-            }
-
-        .semana-card {
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            background: var(--surface);
-            box-shadow: var(--shadow);
-        }
-
-        .semana-header {
-            background: linear-gradient(90deg, var(--unab-navy), #1a3170);
-            color: #fff;
-            padding: 20px 28px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .semana-badge {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: var(--unab-red);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 6px;
-            flex-shrink: 0;
-        }
-
-        .semana-title-text {
-            font-family: var(--display);
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .semana-body {
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-
-        .pdf-block {
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius2);
-            overflow: hidden;
-        }
-
-        .pdf-block-header {
-            background: var(--surface2);
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .pdf-block-label {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--text3);
-        }
-
-        .pdf-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-            .pdf-actions a {
-                font-family: var(--mono);
-                font-size: 11px;
-                padding: 5px 10px;
-                border-radius: 6px;
-                text-decoration: none;
-                border: 1px solid var(--border);
-                color: var(--text2);
-                background: var(--surface);
-                transition: border-color .12s, color .12s;
-            }
-
-                .pdf-actions a:hover {
-                    border-color: var(--unab-blue);
-                    color: var(--unab-blue);
-                }
-
-        .pdf-frame {
-            width: 100%;
-            height: 560px;
-            display: block;
-            background: #e8e4dc;
-            border: none;
-        }
-
-        .reflexion-wrap {
-            border: 1.5px solid #dbeafe;
-            border-left: 5px solid var(--unab-blue);
-            border-radius: var(--radius2);
-            background: #f0f5ff;
-            overflow: hidden;
-        }
-
-        .reflexion-header {
-            background: #dbeafe;
-            padding: 10px 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .reflexion-label {
-            font-family: var(--mono);
-            font-size: 11px;
-            letter-spacing: 1px;
-            color: var(--unab-navy);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .reflexion-body {
-            padding: 20px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .reflexion-pregunta {
-            font-family: var(--mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--unab-blue);
-            margin-bottom: 4px;
-        }
-
-        .reflexion-resp {
-            font-size: 14.5px;
-            color: var(--text2);
-            line-height: 1.7;
-        }
-
-        .reflexion-comparacion {
-            background: #e0ebff;
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-size: 14px;
-            color: var(--unab-navy);
-            line-height: 1.65;
-        }
-
-            .reflexion-comparacion strong {
-                color: var(--unab-red);
-            }
-
-        footer {
-            margin-top: 40px;
-            padding: 24px 40px;
-            border-top: 1px solid var(--border);
-            font-size: 12px;
-            color: var(--text3);
-            font-family: var(--mono);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        @media print {
-            body {
-                background: #fff;
-            }
-
-            .topbar, .sidebar, footer .btn {
-                display: none;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            .pdf-frame {
-                height: 480px;
-            }
-
-            .semana-header {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-
-            to {
-                opacity: 1;
-                transform: none;
-            }
-        }
-
-        .card, .semana-card {
-            animation: fadeUp .45s ease both;
-        }
-
-            .card:nth-child(2) {
-                animation-delay: .07s;
-            }
-
-            .card:nth-child(3) {
-                animation-delay: .14s;
-            }
-
-            .semana-card:nth-child(1) {
-                animation-delay: .06s;
-            }
-
-            .semana-card:nth-child(2) {
-                animation-delay: .12s;
-            }
-
-            .semana-card:nth-child(3) {
-                animation-delay: .18s;
-            }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3f0e8" />
+  <meta name="description"
+    content="Portafolio académico de evidencias del primer período: evaluación educativa en entornos virtuales, dos semanas de análisis, diseño y reflexión pedagógica." />
+  <title>Evaluar también es aprender · Portafolio de Luis R. García Zaña</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400,0,1;9..144,500,0,1;9..144,600,0,1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script src="assets/js/app.js" defer></script>
 </head>
+
 <body>
-    <div class="wrapper">
-
-        <aside class="sidebar" aria-label="Navegación">
-            <div class="logo-block">
-                <!--<div class="univ">Universidad Doctor Andrés Bello</div>
-                <div class="sigla">UNAB</div>-->
-                 <div class="logo-portada-wrap">
-                                <img src="https://www.unab.edu.sv/wp-content/uploads/2024/12/Logos-U-1024x327.png"
-                                     alt="Logo UNAB"
-                                     class="logo-portada">
-                            </div>
-                <div class="asig">Evaluación Educativa · G5</div>
-            </div>
-
-            <div class="progress-wrap">
-                <div class="progress-label">Progreso de lectura</div>
-                <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
-            </div>
-
-            <nav aria-label="Secciones del portafolio">
-                <div class="nav-label">Contenido</div>
-                <ul>
-                    <li><a href="#portada"><span>Portada</span><span class="num">01</span></a></li>
-                    <li><a href="#indice"><span>Índice</span><span class="num">02</span></a></li>
-                    <li><a href="#introduccion"><span>Introducción</span><span class="num">03</span></a></li>
-                    <li><a href="#objetivo"><span>Objetivo</span><span class="num">04</span></a></li>
-                    <li><a href="#sem4"><span>Semana 4</span><span class="num">05</span></a></li>
-                    <li><a href="#sem5"><span>Semana 5</span><span class="num">06</span></a></li>
-                    <li><a href="#sem6"><span>Semana 6</span><span class="num">07</span></a></li>
-                    <li><a href="#sem7"><span>Semana 7</span><span class="num">08</span></a></li>
-                    <li><a href="#sem8"><span>Semana 8</span><span class="num">09</span></a></li>
-                    <li><a href="#sem9"><span>Semana 9</span><span class="num">10</span></a></li>
-                    <li><a href="#sem10"><span>Semana 10</span><span class="num">11</span></a></li>
-                </ul>
-            </nav>
-
-            <div class="sidebar-meta">
-                Portafolio de Evidencias<br>
-                Evaluación Educativa<br>
-            </div>
-        </aside>
-
-        <main>
-            <div class="topbar">
-                <span class="topbar-title">PORTAFOLIO · EVALUACIÓN EDUCATIVA · UNAB</span>
-                <div style="display:flex;gap:8px">
-                    <button class="btn print" onclick="window.print()">⊞ Imprimir / PDF</button>
-                </div>
-            </div>
-
-            <div class="content">
-
-                <section id="portada">
-                    <div class="section-header">
-                        <span class="section-num navy">01</span>
-                        <h2 class="section-title">Portada</h2>
-                    </div>
-                    <div class="portada-hero">
-                        <div class="hero-inner">
-                            <!--<div class="logo-portada-wrap">
-                                <img src="https://www.unab.edu.sv/wp-content/uploads/2024/12/Logos-U-1024x327.png"
-                                     alt="Logo UNAB"
-                                     class="logo-portada">
-                            </div>-->
-                            <div class="hero-univ">Universidad Doctor Andrés Bello</div>
-                            <h1 class="hero-title">Evidencias de mi aprendizaje:<br>Planificación e Instrumentos de Evaluación</h1>
-                            <p class="hero-subtitle">Portafolio - Evaluación Educativa (Semanas 4–10)</p>
-                            <div class="hero-divider"></div>
-                            <div class="meta-grid">
-                                <div class="meta-item">
-                                    <div class="meta-label">Estudiante</div>
-                                    <div class="meta-value">Luis Roberto Garcia Zaña</div>
-                                </div>
-                                <div class="meta-item">
-                                    <div class="meta-label">Asignatura</div>
-                                    <div class="meta-value">Evaluación Educativa</div>
-                                </div>
-                                <div class="meta-item">
-                                    <div class="meta-label">Docente</div>
-                                    <div class="meta-value">Liliana Jeannette Cordero de García</div>
-                                </div>
-                                <div class="meta-item">
-                                    <div class="meta-label">Grupo</div>
-                                    <div class="meta-value">G5</div>
-                                </div>
-                                <div class="meta-item">
-                                    <div class="meta-label">Lugar</div>
-                                    <div class="meta-value">Sonsonate, El Salvador</div>
-                                </div>
-                                <div class="meta-item">
-                                    <div class="meta-label">Fecha</div>
-                                    <div class="meta-value">05 de marzo de 2026</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="indice" class="card">
-                    <div class="section-header">
-                        <span class="section-num blue">02</span>
-                        <h2 class="section-title">Índice</h2>
-                    </div>
-                    <div class="index-grid">
-                        <a href="#portada" class="index-item">
-                            <span class="index-num">01</span>
-                            <span class="index-text">Portada</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#indice" class="index-item">
-                            <span class="index-num">02</span>
-                            <span class="index-text">Índice</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#introduccion" class="index-item">
-                            <span class="index-num">03</span>
-                            <span class="index-text">Introducción</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#objetivo" class="index-item">
-                            <span class="index-num">04</span>
-                            <span class="index-text">Objetivo del portafolio</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem4" class="index-item">
-                            <span class="index-num">05</span>
-                            <span class="index-text">Semana 4 — Planificación de la evaluación de los aprendizajes</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem5" class="index-item">
-                            <span class="index-num">06</span>
-                            <span class="index-text">Semana 5 — Prueba objetiva y tabla de especificaciones</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem6" class="index-item">
-                            <span class="index-num">07</span>
-                            <span class="index-text">Semana 6 — Prueba de ensayo y prueba de actuación</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem7" class="index-item">
-                            <span class="index-num">08</span>
-                            <span class="index-text">Semana 7 — e-Evaluación y análisis de ítems</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem8" class="index-item">
-                            <span class="index-num">09</span>
-                            <span class="index-text">Semana 8 — Análisis porcentual y análisis por objetivos</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem9" class="index-item">
-                            <span class="index-num">10</span>
-                            <span class="index-text">Semana 9 — Evaluación por normas y evaluación por criterios</span>
-                            <span class="index-dot"></span>
-                        </a>
-                        <a href="#sem10" class="index-item">
-                          <span class="index-num">11</span>
-                          <span class="index-text">Semana 10 — Evaluación por competencias</span>
-                          <span class="index-dot"></span>
-                        </a>
-                    </div>
-                </section>
-
-                <section id="introduccion" class="card">
-                    <div class="section-header">
-                        <span class="section-num blue">03</span>
-                        <h2 class="section-title">Introducción</h2>
-                    </div>
-                    <div class="prose">
-                        <p>
-                            El presente <strong>Portafolio de Evidencias</strong> recopila los trabajos desarrollados en las
-                            <strong>semanas 4, 5, 6, 7, 8, 9 y 10</strong> de la asignatura <strong>Evaluación Educativa</strong> en la
-                            <strong>Universidad Doctor Andrés Bello (UNAB)</strong>. Su finalidad es demostrar, de manera organizada,
-                            el aprendizaje alcanzado sobre la <strong>planificación de la evaluación</strong>, la selección de
-                            <strong>técnicas e instrumentos</strong>, la elaboración de pruebas, el uso de herramientas para la
-                            <strong>e-Evaluación</strong>, el <strong>análisis de ítems</strong>, el <strong>análisis de resultados</strong>
-                            y la diferencia entre la <strong>evaluación por normas</strong> y la <strong>evaluación por criterios</strong>.
-                        </p>
-                        <p>
-                            El portafolio sigue una secuencia organizada que incluye portada, índice, introducción, objetivo y las
-                            evidencias correspondientes a cada semana. Cada sección presenta el tema trabajado, los materiales de apoyo,
-                            el progreso o actividad desarrollada y una reflexión sobre los aprendizajes obtenidos, con el propósito de
-                            fortalecer la práctica evaluativa en contextos de educación superior.
-                        </p>
-                        <p>
-                            Este instrumento evidencia el proceso formativo desarrollado durante las semanas trabajadas y permite valorar
-                            de forma integral la evolución de los conocimientos, habilidades y criterios pedagógicos adquiridos en torno
-                            a la evaluación educativa.
-                        </p>
-                    </div>
-                </section>
-
-                <section id="objetivo" class="card">
-                    <div class="section-header">
-                        <span class="section-num gold">04</span>
-                        <h2 class="section-title">Objetivo del portafolio</h2>
-                    </div>
-                    <div class="objetivo-box">
-                        Presentar de forma organizada las evidencias y reflexiones correspondientes a las semanas 4, 5, 6, 7, 8, 9 y 10,
-                        demostrando el dominio de contenidos relacionados con la planificación de la evaluación, el diseño de instrumentos,
-                        la prueba objetiva, la prueba de ensayo, la prueba de actuación, la e-Evaluación, el análisis de ítems,
-                        el análisis de resultados y los enfoques de evaluación por normas y por criterios, con el fin de evidenciar
-                        el aprendizaje obtenido en cada temática y fortalecer la práctica docente evaluativa.
-                    </div>
-                </section>
-
-                <section id="sem4">
-                    <div class="section-header">
-                        <span class="section-num">05</span>
-                        <h2 class="section-title">Semana 4 — Planificación de la evaluación de los aprendizajes</h2>
-                    </div>
-                    <div class="semana-card">
-                        <div class="semana-header">
-                            <span class="semana-badge">Semana 4</span>
-                            <span class="semana-title-text">Planificación de la evaluación de los aprendizajes</span>
-                        </div>
-                        <div class="semana-body">
-
-                            <div class="card" style="padding:20px;">
-                                <div class="prose">
-                                    <p><strong>Fechas:</strong> 13 y 14 de febrero de 2026</p>
-                                    <p><strong>Tema:</strong> Planificación de la evaluación de los aprendizajes.</p>
-                                    <p><strong>Materiales:</strong> Documento sobre prácticas innovadoras en evaluación del aprendizaje; documento sobre competencias, objetivos y contenidos como punto de partida para la evaluación; documento sobre métodos y técnicas de evaluación; documento sobre el plan de evaluación y sus componentes; capítulo sobre innovaciones en evaluación educativa.</p>
-                                    <p><strong>Material complementario:</strong> “Evaluación de competencias en educación superior: conceptos, principios y agentes”; “Hacia una Evaluación Auténtica del Aprendizaje.”</p>
-                                    <p><strong>Actividad:</strong> Actividad en Padlet para evaluar la clase.</p>
-                                </div>
-                            </div>
-
-                            <div class="pdf-block">
-                                <div class="pdf-block-header">
-                                    <span class="pdf-block-label">📄 Trabajo de la Semana 4 (PDF)</span>
-                                    <div class="pdf-actions">
-                                        <a href="archivos/semana4.pdf" target="_blank" rel="noopener">Abrir</a>
-                                        <a href="archivos/semana4.pdf" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <iframe class="pdf-frame" src="archivos/semana4.pdf" title="Semana 4 — Planificación de la evaluación de los aprendizajes"></iframe>
-                            </div>
-
-                            <div class="reflexion-wrap">
-                                <div class="reflexion-header">
-                                    <span class="reflexion-label">Reflexión</span>
-                                </div>
-                                <div class="reflexion-body">
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                                        <div class="reflexion-resp">Aprendí que la evaluación debe planificarse desde el inicio del proceso de enseñanza, tomando como base las competencias, objetivos y contenidos. Comprendí que una buena planificación permite seleccionar de manera más precisa los métodos, técnicas e instrumentos que se utilizarán para valorar el aprendizaje.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué se me facilitó?</div>
-                                        <div class="reflexion-resp">Se me facilitó identificar la relación entre objetivos, contenidos y evaluación, ya que esta conexión permite organizar mejor el proceso formativo y dar sentido a cada actividad evaluativa.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                                        <div class="reflexion-resp">Debo mejorar en la elaboración de planes de evaluación más detallados, especialmente en la selección de evidencias y en la redacción de criterios que permitan valorar el aprendizaje con mayor claridad.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                                        <div class="reflexion-resp">Aplicaré este aprendizaje al momento de diseñar mis clases, procurando que la evaluación no sea improvisada, sino integrada desde la planificación para que responda realmente a los propósitos formativos.</div>
-                                    </div>
-                                    <div class="reflexion-comparacion">
-                                        <strong>Comparación con situación análoga:</strong> Cuando una evaluación se diseña al final, suele quedar desconectada de los objetivos de aprendizaje. En cambio, cuando se planifica desde el inicio, se vuelve más coherente, pertinente y útil para orientar el proceso educativo.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id="sem5">
-                    <div class="section-header">
-                        <span class="section-num">06</span>
-                        <h2 class="section-title">Semana 5 — Tríada: objetos, tareas y criterios de evaluación. Prueba objetiva</h2>
-                    </div>
-                    <div class="semana-card">
-                        <div class="semana-header">
-                            <span class="semana-badge">Semana 5</span>
-                            <span class="semana-title-text">Objetos, tareas y criterios de evaluación · Prueba objetiva</span>
-                        </div>
-                        <div class="semana-body">
-
-                            <div class="card" style="padding:20px;">
-                                <div class="prose">
-                                    <p><strong>Fechas:</strong> 20 y 21 de febrero de 2026</p>
-                                    <p><strong>Tema:</strong> Tríada: Objetos, tareas y criterios de evaluación. Medios e instrumentos de evaluación: la Prueba Objetiva.</p>
-                                    <p><strong>Materiales:</strong> Documento sobre objetos, tareas y criterios de evaluación; documento sobre prueba objetiva (características y tipos de ítems/reactivos); documento sobre planteamiento de la prueba objetiva (criterios para ensamblar y analizar resultados); documento sobre uso de tabla de especificaciones; documento sobre calidad del aprendizaje universitario; documento sobre tablas de especificaciones.</p>
-                                    <p><strong>Material complementario:</strong> “La retroalimentación en la evaluación”; “Diseño de Pruebas Objetivas”; “La evaluación educativa.”</p>
-                                </div>
-                            </div>
-
-                            <div class="pdf-block">
-                                <div class="pdf-block-header">
-                                    <span class="pdf-block-label">📄 Trabajo de la Semana 5 (PDF)</span>
-                                    <div class="pdf-actions">
-                                        <a href="archivos/semana5.pdf" target="_blank" rel="noopener">Abrir</a>
-                                        <a href="archivos/semana5.pdf" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <iframe class="pdf-frame" src="archivos/semana5.pdf" title="Semana 5 — Prueba objetiva y tabla de especificaciones"></iframe>
-                            </div>
-
-                            <div class="reflexion-wrap">
-                                <div class="reflexion-header">
-                                    <span class="reflexion-label">Reflexión</span>
-                                </div>
-                                <div class="reflexion-body">
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                                        <div class="reflexion-resp">Comprendí la tríada fundamental de la evaluación: objeto, tarea y criterios. También aprendí que una prueba objetiva debe construirse con preguntas claras, válidas y coherentes con los aprendizajes esperados, y que la tabla de especificaciones ayuda a distribuir mejor contenidos y niveles cognitivos.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué fue lo más importante?</div>
-                                        <div class="reflexion-resp">Lo más importante fue reconocer que la tabla de especificaciones funciona como una guía técnica para garantizar equilibrio, validez y congruencia entre los contenidos, objetivos y reactivos de una prueba objetiva.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                                        <div class="reflexion-resp">Debo mejorar en la redacción de ítems más precisos y en la formulación de criterios que permitan medir con mayor claridad el desempeño del estudiante, evitando ambigüedades en las preguntas.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                                        <div class="reflexion-resp">En futuras evaluaciones procuraré diseñar pruebas objetivas mejor estructuradas y respaldadas por tablas de especificaciones, para asegurar que cada instrumento mida realmente lo que se pretende evaluar.</div>
-                                    </div>
-                                    <div class="reflexion-comparacion">
-                                        <strong>Comparación con situación análoga:</strong> Una prueba elaborada sin tabla de especificaciones puede sobrevalorar ciertos temas y dejar fuera otros contenidos importantes. En cambio, una prueba planificada con criterios y distribución adecuada ofrece resultados más justos y confiables.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id="sem6">
-                    <div class="section-header">
-                        <span class="section-num">07</span>
-                        <h2 class="section-title">Semana 6 — Prueba de ensayo y prueba de actuación</h2>
-                    </div>
-                    <div class="semana-card">
-                        <div class="semana-header">
-                            <span class="semana-badge">Semana 6</span>
-                            <span class="semana-title-text">Prueba de ensayo · Pruebas de actuación</span>
-                        </div>
-                        <div class="semana-body">
-
-                            <div class="card" style="padding:20px;">
-                                <div class="prose">
-                                    <p><strong>Fechas:</strong> 27 y 28 de febrero de 2026</p>
-                                    <p><strong>Tema (viernes):</strong> Prueba de ensayos: características, criterios para su diseño, aplicación y análisis de resultados.</p>
-                                    <p><strong>Tema (sábado):</strong> Pruebas de actuación: características, metodología, criterios para su diseño, aplicación y análisis de resultados.</p>
-                                    <p><strong>Materiales:</strong> Documentos sobre prueba de ensayos y prueba de actuación; documentos sobre criterios de evaluación del aprendizaje; “El Ensayo”; guía práctica de diseño de instrumentos de evaluación y certificación de competencias; “La evaluación del desempeño o de las competencias.”</p>
-                                    <p><strong>Actividad evaluada:</strong> Segundo Laboratorio y Segundo Parcial — Portafolio digital de evidencias con las actividades de semanas 4, 5 y 6.</p>                                    
-                                </div>
-                            </div>
-
-                            <div class="pdf-block">
-                                <div class="pdf-block-header">
-                                    <span class="pdf-block-label">📄 Trabajo de la Semana 6 (PDF)</span>
-                                    <div class="pdf-actions">
-                                        <a href="archivos/semana6.pdf" target="_blank" rel="noopener">Abrir</a>
-                                        <a href="archivos/semana6.pdf" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <iframe class="pdf-frame" src="archivos/semana6.pdf" title="Semana 6 — Prueba de ensayo y actuación"></iframe>
-                            </div>
-
-                            <div class="reflexion-wrap">
-                                <div class="reflexion-header">
-                                    <span class="reflexion-label">Reflexión</span>
-                                </div>
-                                <div class="reflexion-body">
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                                        <div class="reflexion-resp">Aprendí que la prueba de ensayo permite valorar procesos mentales superiores como el análisis, la síntesis y la argumentación, mientras que la prueba de actuación permite evaluar el desempeño real del estudiante frente a tareas auténticas. Ambas requieren criterios claros para ser aplicadas con mayor objetividad.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué se me facilitó?</div>
-                                        <div class="reflexion-resp">Se me facilitó comprender la importancia de utilizar listas de cotejo o escalas de calificación cuando se evalúan actuaciones, ya que estos instrumentos ayudan a observar con mayor claridad el nivel de desempeño alcanzado.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                                        <div class="reflexion-resp">Debo mejorar en la formulación de consignas de ensayo más precisas y en la elaboración de indicadores más observables para las pruebas de actuación, de modo que la evaluación sea más consistente y útil.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                                        <div class="reflexion-resp">Aplicaré estas estrategias en mi práctica docente para valorar no solo conocimientos teóricos, sino también la capacidad de argumentar, resolver situaciones y demostrar competencias en contextos más cercanos a la realidad.</div>
-                                    </div>
-                                    <div class="reflexion-comparacion">
-                                        <strong>Comparación con situación análoga:</strong> Cuando solo se evalúa con preguntas cerradas, se limita la valoración del pensamiento crítico y del desempeño auténtico. En cambio, el ensayo y la actuación permiten apreciar con mayor profundidad cómo el estudiante interpreta, aplica y demuestra lo aprendido.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id="sem7">
-                    <div class="section-header">
-                        <span class="section-num">08</span>
-                        <h2 class="section-title">Semana 7 — e-Evaluación y análisis de ítems</h2>
-                    </div>
-                    <div class="semana-card">
-                        <div class="semana-header">
-                            <span class="semana-badge">Semana 7</span>
-                            <span class="semana-title-text">Aplicaciones y herramientas para la e-Evaluación · Análisis de ítems</span>
-                        </div>
-                        <div class="semana-body">
-
-                            <div class="card" style="padding:20px;">
-                                <div class="prose">
-                                    <p><strong>Fechas:</strong> 6 y 7 de marzo de 2026</p>
-                                    <p><strong>Tema (viernes):</strong> Aplicaciones y herramientas para la e-Evaluación del e-aprendizaje.</p>
-                                    <p><strong>Tema (sábado):</strong> Análisis de ítems: Dificultad y Discriminación.</p>
-                                    <p><strong>Materiales:</strong> Documento sobre e-Evaluación del e-aprendizaje; documento sobre herramientas digitales de evaluación en línea; documento sobre análisis de ítems (dificultad y discriminación); “Diez herramientas digitales para facilitar la evaluación formativa.”</p>
-                                    <p><strong>Material complementario:</strong> “e-Evaluación orientada al e-Aprendizaje estratégico en Educación Superior”; “Psicometría.”</p>                                    
-                                </div>
-                            </div>
-
-                            <div class="pdf-block">
-                                <div class="pdf-block-header">
-                                    <span class="pdf-block-label">📄 Trabajo de la Semana 7 (PDF)</span>
-                                    <div class="pdf-actions">
-                                        <a href="archivos/semana7.pdf" target="_blank" rel="noopener">Abrir</a>
-                                        <a href="archivos/semana7.pdf" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <iframe class="pdf-frame" src="archivos/semana7.pdf" title="Semana 7 — e-Evaluación y análisis de ítems"></iframe>
-                            </div>
-
-                            <div class="reflexion-wrap">
-                                <div class="reflexion-header">
-                                    <span class="reflexion-label">Reflexión</span>
-                                </div>
-                                <div class="reflexion-body">
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                                        <div class="reflexion-resp">Aprendí que la e-Evaluación no consiste únicamente en digitalizar exámenes, sino en aprovechar herramientas tecnológicas que permiten retroalimentación inmediata, seguimiento del progreso y mayor participación del estudiante. También comprendí la importancia del análisis de ítems para identificar cuáles preguntas son muy fáciles, muy difíciles o poco discriminativas.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué se me facilitó?</div>
-                                        <div class="reflexion-resp">Se me facilitó reconocer el valor de las plataformas digitales en los procesos de evaluación formativa y entender de manera general cómo la dificultad y la discriminación ayudan a mejorar la calidad de una prueba.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                                        <div class="reflexion-resp">Debo fortalecer la interpretación de los resultados del análisis de ítems para tomar decisiones más precisas al momento de revisar, conservar o modificar reactivos dentro de una prueba objetiva.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                                        <div class="reflexion-resp">Aplicaré herramientas digitales en mis evaluaciones y revisaré cada ítem con base en su dificultad y discriminación, para construir instrumentos más confiables y útiles para el aprendizaje.</div>
-                                    </div>
-                                    <div class="reflexion-comparacion">
-                                        <strong>Comparación con situación análoga:</strong> Cuando un docente usa formularios digitales pero no analiza los resultados por ítem, puede repetir errores en futuras evaluaciones. En cambio, si revisa el comportamiento de cada pregunta, puede mejorar la validez y confiabilidad de la prueba.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id="sem8">
-                    <div class="section-header">
-                        <span class="section-num">09</span>
-                        <h2 class="section-title">Semana 8 — Análisis porcentual y análisis por objetivos</h2>
-                    </div>
-                    <div class="semana-card">
-                        <div class="semana-header">
-                            <span class="semana-badge">Semana 8</span>
-                            <span class="semana-title-text">Análisis porcentual por ítem, estudiante y general · Análisis por objetivos</span>
-                        </div>
-                        <div class="semana-body">
-
-                            <div class="card" style="padding:20px;">
-                                <div class="prose">
-                                    <p><strong>Fechas:</strong> 13 y 14 de marzo de 2026</p>
-                                    <p><strong>Tema (viernes):</strong> Análisis porcentual por cada ítem, por cada estudiante y general.</p>
-                                    <p><strong>Tema (sábado):</strong> Análisis por objetivos. Toma de decisiones a partir del análisis de resultados.</p>
-                                    <p><strong>Materiales:</strong> Documentos sobre análisis porcentual y análisis por objetivos; “Teoría Clásica y Teoría de Respuesta a los Ítems”; “Evaluación trans-formativa: El poder transformador de la evaluación formativa.”</p>
-                                    <p><strong>Material complementario:</strong> “Ralph Tyler, el padre de la evaluación educativa”; “Modelo de Evaluación Orientada en los Objetivos (Ralph Tyler - 1950).”</p>                                    
-                                </div>
-                            </div>
-
-                            <div class="pdf-block">
-                                <div class="pdf-block-header">
-                                    <span class="pdf-block-label">📄 Trabajo de la Semana 8 (PDF)</span>
-                                    <div class="pdf-actions">
-                                        <a href="archivos/semana8.pdf" target="_blank" rel="noopener">Abrir</a>
-                                        <a href="archivos/semana8.pdf" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <iframe class="pdf-frame" src="archivos/semana8.pdf" title="Semana 8 — Análisis porcentual y análisis por objetivos"></iframe>
-                            </div>
-
-                            <div class="reflexion-wrap">
-                                <div class="reflexion-header">
-                                    <span class="reflexion-label">Reflexión</span>
-                                </div>
-                                <div class="reflexion-body">
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                                        <div class="reflexion-resp">Aprendí a interpretar los resultados de una evaluación desde distintos niveles: por ítem, por estudiante y de forma general. También comprendí que el análisis por objetivos permite verificar si realmente se alcanzaron los aprendizajes esperados y tomar decisiones pedagógicas más fundamentadas.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué se me facilitó?</div>
-                                        <div class="reflexion-resp">Se me facilitó comprender el análisis porcentual general y reconocer que los datos de una evaluación no solo sirven para asignar una nota, sino también para identificar debilidades y fortalezas en el proceso de enseñanza-aprendizaje.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                                        <div class="reflexion-resp">Debo mejorar en la interpretación más técnica de los resultados por objetivos y en la formulación de decisiones concretas a partir de la evidencia obtenida en una prueba.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                                        <div class="reflexion-resp">Utilizaré el análisis de resultados como base para replantear estrategias de enseñanza, reforzar contenidos no alcanzados y ajustar futuras evaluaciones con un enfoque más formativo.</div>
-                                    </div>
-                                    <div class="reflexion-comparacion">
-                                        <strong>Comparación con situación análoga:</strong> Si un docente solo revisa la nota final de un grupo, pierde información importante sobre qué objetivos no se lograron. En cambio, cuando analiza porcentajes por ítem y por objetivo, puede detectar con mayor claridad dónde intervenir para mejorar el aprendizaje.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id="sem9">
-                    <div class="section-header">
-                        <span class="section-num">10</span>
-                        <h2 class="section-title">Semana 9 — Evaluación por normas y evaluación por criterios</h2>
-                    </div>
-                    <div class="semana-card">
-                        <div class="semana-header">
-                            <span class="semana-badge">Semana 9</span>
-                            <span class="semana-title-text">Evaluación por normas · Evaluación por criterios</span>
-                        </div>
-                        <div class="semana-body">
-
-                            <div class="card" style="padding:20px;">
-                                <div class="prose">
-                                    <p><strong>Fechas:</strong> 20 y 21 de marzo de 2026</p>
-                                    <p><strong>Tema (viernes):</strong> Evaluación por Normas — concepto, propósito, metodología, instrumentos y análisis de resultados.</p>
-                                    <p><strong>Tema (sábado):</strong> Evaluación por Criterios — concepto, propósito, metodología, instrumentos y análisis de resultados.</p>
-                                    <p><strong>Materiales:</strong> Documentos sobre evaluación por normas y evaluación por criterios; “Evaluación educativa de aprendizajes y competencias”; “La evaluación en el proceso de aprendizaje.”</p>
-                                    <p><strong>Material complementario:</strong> “Sistema de Evaluación Criterial”; “Directrices para la redacción de objetivos de aprendizaje.”</p>                                    
-                                </div>
-                            </div>
-
-                            <div class="pdf-block">
-                                <div class="pdf-block-header">
-                                    <span class="pdf-block-label">📄 Trabajo de la Semana 9 (PDF)</span>
-                                    <div class="pdf-actions">
-                                        <a href="archivos/semana9.pdf" target="_blank" rel="noopener">Abrir</a>
-                                        <a href="archivos/semana9.pdf" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <iframe class="pdf-frame" src="archivos/semana9.pdf" title="Semana 9 — Evaluación por normas y criterios"></iframe>
-                            </div>
-
-                            <div class="reflexion-wrap">
-                                <div class="reflexion-header">
-                                    <span class="reflexion-label">Reflexión</span>
-                                </div>
-                                <div class="reflexion-body">
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                                        <div class="reflexion-resp">Aprendí a diferenciar entre la evaluación por normas y la evaluación por criterios. La primera compara el desempeño de un estudiante con el de otros, mientras que la segunda lo valora con base en estándares o logros previamente definidos. Comprendí que cada enfoque tiene implicaciones distintas en la interpretación de resultados y en la toma de decisiones.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué fue lo más importante?</div>
-                                        <div class="reflexion-resp">Lo más importante fue reconocer que la evaluación por criterios resulta más coherente con un enfoque formativo, porque permite valorar el nivel de logro del aprendizaje esperado sin depender del rendimiento del grupo.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                                        <div class="reflexion-resp">Debo fortalecer mi capacidad para diseñar instrumentos y criterios de evaluación más claros, de manera que la valoración de los aprendizajes sea más objetiva, transparente y útil para la retroalimentación.</div>
-                                    </div>
-                                    <div class="reflexion-item">
-                                        <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                                        <div class="reflexion-resp">Procuraré utilizar con mayor frecuencia la evaluación por criterios en mi práctica docente, ya que favorece la claridad de expectativas, la equidad y la mejora continua del aprendizaje.</div>
-                                    </div>
-                                    <div class="reflexion-comparacion">
-                                        <strong>Comparación con situación análoga:</strong> En un grupo donde solo se califica en comparación con los demás, un estudiante podría parecer “bueno” aunque no alcance realmente los objetivos. En cambio, con evaluación por criterios se identifica con mayor precisión si logró o no las competencias esperadas.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section id="sem10">
-          <div class="section-header">
-            <span class="section-num">11</span>
-            <h2 class="section-title">Semana 10 — Evaluación por competencias</h2>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <div class="site-shell" id="inicio">
+    <header class="topbar">
+      <a href="#inicio" class="brand brand-logo" aria-label="Ir al inicio del portafolio"><img
+          src="assets/img/logo-unab-cida.png" alt="Logo Universidad Dr. Andrés Bello y CIDA" /></a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#presentacion">Presentación</a>
+        <a href="#itinerario">Evidencias</a>
+        <a href="#reflexion-global">Reflexión</a>
+      </nav>
+             <div class="top-actions"><!--<span class="issue-id">ED. 01 / 2026</span> --><button class="theme-toggle" id="theme-toggle"
+          type="button" aria-pressed="false" aria-label="Cambiar modo de lectura"><span
+            aria-hidden="true">◐</span></button></div>
+    </header>
+    <main id="contenido">
+      <section class="hero" aria-labelledby="titulo-principal">
+        <div class="hero-copy">
+          <!-- <div class="overline"><span class="overline-line"></span> UNIVERSIDAD DOCTOR ANDRÉS BELLO · UNAB</div> -->
+          <p class="hero-series">PORTAFOLIO <span>／ PRIMER PERÍODO</span></p>
+          <h1 id="titulo-principal">Evaluar<br>también es<br><em>aprender<span class="hero-dot">.</span></em></h1>
+          <p class="hero-deck"></p>
+          <div class="hero-actions"><a class="pill-button" href="#itinerario">Explorar evidencias <span
+                aria-hidden="true"></span></a><a class="text-link" href="#presentacion">Conocer el propósito <span
+                aria-hidden="true"></span></a></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <!-- <div class="vertical-label">EVIDENCIAS EN MOVIMIENTO — 2026</div> -->
+          <div class="folio-back folio-back-one"></div>
+          <div class="folio-back folio-back-two"></div>
+          <div class="folio-main">
+            <div class="folio-head"><span>UNAB / MAESTRÍA</span><span>PORTAFOLIO</span></div>
+            <div class="folio-center"><span class="folio-sup">EL APRENDIZAJE</span><span
+                class="folio-symbol">e<span>↗</span></span><span class="folio-bottom">COMO EVIDENCIA<br>Y
+                POSIBILIDAD</span></div>
+            <div class="folio-bottom-strip"><span>OBSERVAR</span><span>REFLEXIONAR</span><span>MEJORAR</span></div>
           </div>
-          <div class="semana-card">
-            <div class="semana-header">
-              <span class="semana-badge">Semana 10</span>
-              <span class="semana-title-text">Evaluación por objetivos · Evaluación por competencias</span>
+          <!-- <div class="seal">DOS<br>SEMANAS <span>✳</span></div> -->
+          <!-- <div class="hero-caption">UNA COLECCIÓN INTENCIONADA<br>DE EXPERIENCIAS DE APRENDIZAJE</div> -->
+        </div>
+        <div class="hero-foot"><span>SONSONATE, EL SALVADOR <span aria-hidden="true">↗</span></span><span>OCTUBRE /
+            2026</span><span class="scroll-hint">DESPLAZARSE PARA EXPLORAR <span aria-hidden="true">↓</span></span>
+        </div>
+      </section>
+
+      <section class="identity-band" aria-label="Datos académicos">
+        <div><small>AUTOR</small><strong>Luis Roberto<br>García Zaña</strong></div>
+        <div><small>PROGRAMA ACADÉMICO</small><strong>Maestría en Docencia Universitaria<br>en Entornos
+            Virtuales</strong></div>
+        <div><small>ASIGNATURA</small><strong>Evaluación Educativa<br>en Entornos Virtuales</strong></div>
+        <div><small>DOCENTE</small><strong>Liliana Jeannette<br>Cordero De García</strong></div>
+      </section>
+
+      <section class="section intro-section" id="presentacion" aria-labelledby="intro-title">
+        <div class="section-pre"><span class="section-num">01 -</span> INTRODUCCIÓN</div>
+        <div class="intro-grid">
+          <div>
+            <h2 id="intro-title" class="section-title">No es solo<br>lo que <em>hice.</em><br>Es lo que
+              <em>aprendí.</em>
+            </h2>
+            <div class="thin-illustration" aria-hidden="true"><span class="circle-one"></span><span
+                class="circle-two"></span><span class="circle-three"></span><span class="fig-line"></span></div>
+          </div>
+          <div class="prose">
+            <p class="lead">Este portafolio reúne evidencias seleccionadas del primer período de la asignatura
+              Evaluación Educativa en Entornos Virtuales.</p>
+            <p>Su organización responde a un itinerario de aprendizaje de dos semanas: primero, el análisis crítico de
+              situaciones de evaluación; después, el examen de la coevaluación y el diseño de una actividad con
+              criterios e instrumento explícitos. Cada evidencia está acompañada por una reflexión que explica lo
+              aprendido y su proyección hacia la práctica docente.</p>
+            <p>El portafolio no busca mostrar únicamente productos terminados. También documenta las decisiones que
+              hacen
+              posible una evaluación más pertinente, formativa y coherente con las competencias que se espera
+              desarrollar.</p>
+            <!-- <div class="editor-note"><span>NOTA DE AUTENTICIDAD</span>
+              <p>La evidencia de la semana 1 corresponde al trabajo grupal <strong>«Análisis descriptivo de 2
+                  casos»</strong>, que aborda la autoevaluación en un curso virtual de posgrado y la heteroevaluación de
+                una actividad colaborativa virtual. Se presenta el documento proporcionado por sus autores sin alterar
+                su contenido. Los trabajos de la semana 2 se fundamentan en los materiales de la clase y también se
+                incluyen las capturas de las retroalimentaciones 1 y 2.</p>
+            </div> -->
+          </div>
+        </div>
+      </section>
+
+      <section class="purpose-section" id="objetivo" aria-labelledby="objective-title">
+        <div class="purpose-lead"><span>02 - OBJETIVO</span>
+          <!-- <span class="purpose-glyph" aria-hidden="true">✳</span> -->
+        </div>
+        <div class="purpose-body">
+          <h2 id="objective-title">Hacer visible<br>el <em>proceso</em> de aprender.</h2>
+          <p>Analizar, documentar y reflexionar críticamente sobre las estrategias e instrumentos de evaluación
+            estudiados durante las dos primeras semanas, integrando dos casos, una propuesta de coevaluación y el diseño
+            de una actividad auténtica; así se evidencia la transición desde la comprensión conceptual hacia decisiones
+            pedagógicas aplicables a la docencia universitaria virtual.</p>
+          <!-- <div class="purpose-tags"><span>01 / Recolección</span><span>02 / Selección</span><span>03 /
+              Reflexión</span><span>04 / Proyección</span></div> -->
+        </div>
+      </section>
+
+      <section class="section index-section" id="indice" aria-labelledby="index-title">
+        <div class="section-pre"><span class="section-num">03 -</span> ÍNDICE</div>
+        <div class="index-grid">
+          <div>
+            <h2 id="index-title" class="section-title">Recorrido<span class="accent-mark">↘</span></h2>
+            <!-- <p class="small-muted">Una secuencia deliberada: comprender, diseñar y mejorar.</p> -->
+          </div>
+          <nav class="contents" aria-label="Índice del portafolio">
+            <a href="#presentacion"><span>01</span><strong>Introducción y contexto</strong></a>
+            <a href="#objetivo"><span>02</span><strong>Objetivo y propósito</strong></a>
+            <a href="#itinerario"><span>03</span><strong>Evidencias: semana 1 y semana 2</strong></a>
+            <a href="#reflexion-global"><span>04</span><strong>Reflexión y proyección</strong></a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="section evidence-section" id="itinerario" aria-labelledby="evidence-title">
+        <div class="section-pre"><span class="section-num">04 -</span> EVIDENCIAS</div>
+        <div class="evidence-head">
+          <div>
+            <h2 id="evidence-title" class="section-title">Cuatro piezas. <em>Una evolución.</em></h2>
+            <p>Dos semanas de trabajo, análisis y construcción de criterios para evaluar.</p>
+          </div>
+          <!-- <div class="count-panel"><strong>04<span> / EVIDENCIAS</span></strong><strong>02<span> /
+                SEMANAS</span></strong><strong>03<span> / DOCUMENTOS WORD</span></strong></div> -->
+        </div>
+        <div class="filters" role="group" aria-label="Filtrar evidencias por semana"><button type="button"
+            class="filter active" data-week="all" aria-pressed="true">Todas las evidencias
+            <span>04</span></button><button type="button" class="filter" data-week="1" aria-pressed="false">Semana 01
+            <span>02</span></button><button type="button" class="filter" data-week="2" aria-pressed="false">Semana 02
+            <span>02</span></button></div>
+        <div class="evidence-list" id="evidence-list">
+          <article class="evidence" data-week="1" id="caso-1">
+            <div class="evidence-spine"><span>01</span><i></i></div>
+            <div class="evidence-card">
+              <div class="evidence-headline">
+                <div>
+                  <div class="evidence-tag">SEMANA 01 <span>-</span> ESTUDIO DE CASO</div>
+                  <h3>Autoevaluación en un<br>curso virtual de <em>posgrado.</em></h3>
+                  <p>Supervisión de personal de ventas: autorregulación, rúbrica analítica y mejora de una propuesta en
+                    Moodle.</p>
+                </div>
+                <div class="evidence-visual visual-one" aria-hidden="true">
+                  <div class="gridlines"></div>
+                  <div class="visual-pct">01<span>/ 04</span></div><span class="visual-shape shape-one"></span><span
+                    class="visual-shape shape-two"></span><span class="visual-label">AUTO<br>EVALUACIÓN</span>
+                </div>
+              </div>
+              <div class="evidence-detail">
+                <div><span class="eyebrow">¿QUÉ SE ANALIZÓ?</span>
+                  <p>Se analiza cómo un estudiante valora una propuesta de aprendizaje virtual en Moodle sobre
+                    supervisión de personal de ventas. El trabajo incluye una rúbrica de cinco criterios y 20 puntos,
+                    interpreta un resultado ilustrativo de 16/20 y propone acciones de mejora y seguimiento.</p>
+                </div>
+                <div class="reflection"><span class="eyebrow">REFLEXIÓN PERSONAL</span>
+                  <p>Este caso me permitió comprender que autoevaluarse exige contrastar decisiones pedagógicas con
+                    criterios y evidencias verificables, no solo asignarse una puntuación. El resultado de 16/20 permite
+                    identificar aspectos prioritarios de mejora, pero no equivale a una calificación definitiva. Al
+                    planificar actividades virtuales, incorporaré una matriz que relacione objetivos, actividades,
+                    evidencias y criterios, seguida de una nueva revisión.</p>
+                </div>
+              </div>
+              <div class="evidence-footer"><span class="format-label">EVIDENCIA 01 · ANÁLISIS DEL CASO 1 · TRABAJO
+                  GRUPAL</span>
+                <div class="evidence-actions"><button class="outline-button view-document" type="button"
+                    data-file="documentos/01_Analisis_Dos_Estudios_de_Caso_Semana_1.pdf#page=2"
+                    data-title="Caso 1: autoevaluación en un curso virtual de posgrado">Leer evidencia
+                    </button><a href="documentos/01_Analisis_Dos_Estudios_de_Caso_Semana_1.docx" download
+                    class="download-link">Word </a></div>
+              </div>
             </div>
-            <div class="semana-body">
-
-              <div class="card" style="padding:20px;">
-                <div class="prose">
-                  <p><strong>Fechas:</strong> 27 y 28 de marzo de 2026</p>
-                  <p><strong>Tema (viernes):</strong> Evaluación por objetivos — concepto, propósito, metodología, instrumentos y análisis de resultados.</p>
-                  <p><strong>Tema (sábado):</strong> Evaluación por competencias — concepto, propósito, metodología, instrumentos y análisis de resultados.</p>
-                  <p><strong>Materiales:</strong></p>
-                  <p>Tests Psicológicos y Evaluación (Lewis R.), Evaluación de aprendizajes (Julio Pimienta), Introducción a la Psicometría, Cano García (2015) — Evaluación por competencias en educación superior, Díaz Barriga — Estrategias docentes para un aprendizaje significativo, Tobón (2017) — Evaluación de las competencias en la educación básica, Ley de Educación Superior</p>
-                  <p><strong>Material complementario:</strong></p>
-                  <p>“Diseño de rúbricas para competencias”</p>
-                  <p>“Evaluación auténtica en educación superior”</p>
+          </article>
+          <article class="evidence" data-week="1" id="caso-2">
+            <div class="evidence-spine"><span>02</span><i></i></div>
+            <div class="evidence-card">
+              <div class="evidence-headline">
+                <div>
+                  <div class="evidence-tag">SEMANA 01 <span>-</span> ESTUDIO DE CASO</div>
+                  <h3>Heteroevaluación de una<br>actividad <em>colaborativa virtual.</em></h3>
+                  <p>Valoración docente de los proyectos A, B y C con criterios transparentes y retroalimentación
+                    diferenciada.</p>
+                </div>
+                <div class="evidence-visual visual-two" aria-hidden="true">
+                  <div class="gridlines"></div>
+                  <div class="visual-pct">02<span>/ 04</span></div><span class="check-circle">✓</span><span
+                    class="check-line"></span><span class="check-line two"></span><span
+                    class="visual-label">VALORACIÓN<br>DOCENTE</span>
                 </div>
               </div>
-
-              <div class="pdf-block">
-                <div class="pdf-block-header">
-                  <span class="pdf-block-label">📄 Trabajo de la Semana 10 (PDF)</span>
-                  <div class="pdf-actions">
-                    <a href="archivos/semana10.pdf" target="_blank" rel="noopener">Abrir</a>
-                    <a href="archivos/semana10.pdf" download>Descargar</a>
-                  </div>
+              <div class="evidence-detail">
+                <div><span class="eyebrow">¿QUÉ SE ANALIZÓ?</span>
+                  <p>Se analiza la heteroevaluación docente de tres proyectos colaborativos sobre supervisión de
+                    personal de ventas. El documento aplica una rúbrica de 20 puntos y presenta resultados ilustrativos:
+                    equipo A, 15/20; B, 15/20; C, 17/20. Distingue los supuestos de la evidencia disponible y propone
+                    mejoras específicas por equipo.</p>
                 </div>
-                <iframe class="pdf-frame" src="archivos/semana10.pdf" title="Semana 10 — Evaluación por competencias"></iframe>
-              </div>
-
-              <div class="reflexion-wrap">
-                <div class="reflexion-header">
-                  <span class="reflexion-label">Reflexión</span>
-                </div>
-                <div class="reflexion-body">
-                  <div class="reflexion-item">
-                    <div class="reflexion-pregunta">¿Qué aprendí?</div>
-                    <div class="reflexion-resp">Aprendí que la evaluación por competencias integra conocimientos, habilidades y actitudes en contextos reales, y que requiere instrumentos claros como rúbricas y listas de cotejo para valorar el desempeño.</div>
-                  </div>
-                  <div class="reflexion-item">
-                    <div class="reflexion-pregunta">¿Qué fue lo más importante?</div>
-                    <div class="reflexion-resp">Lo más importante fue comprender que este tipo de evaluación permite evidenciar aprendizajes significativos y transferibles, más allá de la memorización.</div>
-                  </div>
-                  <div class="reflexion-item">
-                    <div class="reflexion-pregunta">¿Qué debo mejorar?</div>
-                    <div class="reflexion-resp">Debo mejorar en la redacción de descriptores específicos dentro de las rúbricas, para que cada nivel de logro sea inequívoco y objetivo.</div>
-                  </div>
-                  <div class="reflexion-item">
-                    <div class="reflexion-pregunta">Proyección / Aplicación</div>
-                    <div class="reflexion-resp">Procuraré aplicar la evaluación por competencias en proyectos integradores, vinculando objetivos de aprendizaje con tareas prácticas y retroalimentación formativa.</div>
-                  </div>
-                  <div class="reflexion-comparacion">
-                    <strong>Comparación con situación análoga:</strong> Mientras que la evaluación tradicional mide conocimientos aislados, la evaluación por competencias refleja la capacidad de aplicar lo aprendido en situaciones auténticas, similar a cómo se evalúa el desempeño profesional en escenarios reales.
-                  </div>
+                <div class="reflection"><span class="eyebrow">REFLEXIÓN PERSONAL</span>
+                  <p>Al comparar los equipos, comprendí que una misma puntuación puede ocultar necesidades pedagógicas
+                    distintas. Los equipos A y B obtienen ilustrativamente 15/20, pero A requiere fortalecer la
+                    aplicación práctica y B la coherencia entre objetivos y actividades. A diferencia de limitarme a
+                    asignar notas, procuraré fundamentar cada juicio en la evidencia disponible y ofrecer
+                    recomendaciones específicas, oportunidades de revisión y seguimiento.</p>
                 </div>
               </div>
-
+              <div class="evidence-footer"><span class="format-label">EVIDENCIA 02 · ANÁLISIS DEL CASO 2 · TRABAJO
+                  GRUPAL</span>
+                <div class="evidence-actions"><button class="outline-button view-document" type="button"
+                    data-file="documentos/01_Analisis_Dos_Estudios_de_Caso_Semana_1.pdf#page=7"
+                    data-title="Caso 2: heteroevaluación de actividad colaborativa">Leer evidencia
+                    </button><a href="documentos/01_Analisis_Dos_Estudios_de_Caso_Semana_1.docx" download
+                    class="download-link">Word </a></div>
+              </div>
+            </div>
+          </article>
+          <article class="evidence" data-week="2" id="ciclo-critico">
+            <div class="evidence-spine"><span>03</span><i></i></div>
+            <div class="evidence-card">
+              <div class="evidence-headline">
+                <div>
+                  <div class="evidence-tag">SEMANA 02 <span>-</span> COEVALUACIÓN</div>
+                  <h3>El ciclo crítico:<br>de estudiante a <em>evaluador.</em></h3>
+                  <p>Comunicación constructiva y formación del juicio evaluativo en entornos virtuales.</p>
+                </div>
+                <div class="evidence-visual visual-three" aria-hidden="true">
+                  <div class="gridlines"></div>
+                  <div class="visual-pct">03<span>/ 04</span></div><span class="orb orb-a"></span><span
+                    class="orb orb-b"></span><span class="orb orb-c"></span><span class="orbit-link"></span><span
+                    class="visual-label">DIÁLOGO<br>ENTRE PARES</span>
+                </div>
+              </div>
+              <div class="evidence-detail">
+                <div><span class="eyebrow">¿QUÉ SE DESARROLLÓ?</span>
+                  <p>Respuesta original al planteamiento del grupo 1 sobre qué habilidad resulta más compleja al evaluar
+                    a otros a través de una pantalla. Se propone calibración previa y una guía de retroalimentación en
+                    cuatro pasos.</p>
+                </div>
+                <div class="reflection"><span class="eyebrow">REFLEXIÓN PERSONAL</span>
+                  <p>La coevaluación modifica el rol habitual del estudiante: deja de recibir únicamente comentarios y
+                    aprende a emitirlos con criterio y respeto. Frente a la corrección unilateral del docente, el
+                    diálogo entre pares hace más visible la argumentación. Aplicaré ejercicios con trabajos anónimos
+                    antes de una revisión real.</p>
+                </div>
+              </div>
+              <div class="evidence-footer"><span class="format-label">EVIDENCIA 03 · ACTIVIDAD DEL NUEVO ROL
+                  VIRTUAL</span>
+                <div class="evidence-actions"><button class="outline-button view-document" type="button"
+                    data-file="documentos/02_El_Ciclo_Critico_De_Estudiante_a_Evaluador.pdf"
+                    data-title="El ciclo crítico: de estudiante a evaluador">Leer evidencia </button><a
+                    href="documentos/02_El_Ciclo_Critico_De_Estudiante_a_Evaluador.docx" download
+                    class="download-link">Word </a></div>
+              </div>
+            </div>
+          </article>
+          <article class="evidence" data-week="2" id="diseno-evaluacion">
+            <div class="evidence-spine"><span>04</span><i></i></div>
+            <div class="evidence-card">
+              <div class="evidence-headline">
+                <div>
+                  <div class="evidence-tag">SEMANA 02 <span>-</span> DISEÑO DE INSTRUMENTO</div>
+                  <h3>De la intención al<br><em>criterio evaluable.</em></h3>
+                  <p>Actividad auténtica de CSS Grid con rúbrica analítica de 10 puntos.</p>
+                </div>
+                <div class="evidence-visual visual-four" aria-hidden="true">
+                  <div class="gridlines"></div>
+                  <div class="visual-pct">04<span>/ 04</span></div>
+                  <div class="rubric-visual"><b>CRITERIO</b><b>EVIDENCIA</b><b>MEJORA</b><i></i><i></i><i></i></div>
+                  <span class="visual-label">DISEÑO<br>DE EVALUACIÓN</span>
+                </div>
+              </div>
+              <div class="evidence-detail">
+                <div><span class="eyebrow">¿QUÉ SE DISEÑÓ?</span>
+                  <p>Una tarea ex aula de desarrollo web para crear un miniportal universitario. Incluye objetivo,
+                    consigna, evidencias de proceso, revisión entre pares y rúbrica de desempeño basada en semántica,
+                    Grid, accesibilidad y adaptabilidad.</p>
+                </div>
+                <div class="reflection"><span class="eyebrow">REFLEXIÓN PERSONAL</span>
+                  <p>Este diseño convirtió una idea de tarea en un proceso evaluativo explícito. A diferencia de pedir
+                    únicamente un producto final, la rúbrica comunica qué se espera y la retroalimentación permite
+                    mejorarlo. Confirmé la necesidad de mantener congruencia entre objetivo, actividad, criterios e
+                    instrumento, principio que aplicaré al planificar mis clases.</p>
+                </div>
+              </div>
+              <div class="evidence-footer"><span class="format-label">EVIDENCIA 04 · INSTRUMENTO LISTO PARA
+                  APLICAR</span>
+                <div class="evidence-actions"><button class="outline-button view-document" type="button"
+                    data-file="documentos/03_Diseno_de_Evaluacion_Trabajo_Ex_Aula_CSS_Grid.pdf"
+                    data-title="Diseño de evaluación: HTML y CSS Grid">Leer evidencia </button><a
+                    href="documentos/03_Diseno_de_Evaluacion_Trabajo_Ex_Aula_CSS_Grid.docx" download
+                    class="download-link">Word </a></div>
+              </div>
+            </div>
+          </article>
+        </div>
+<!--         <div class="note-under"><strong>Retroalimentaciones opcionales incorporadas:</strong> se agregan las capturas de
+          pantalla de las calificaciones finales de las retroalimentaciones 1 y 2, ambas con estado
+          <strong>APROBADO</strong> y calificación de <strong>100%</strong>, como respaldo complementario del proceso
+          formativo.
+        </div> -->
+        <div class="feedback-gallery" aria-labelledby="feedback-title">
+          <div class="feedback-header">
+            <div>
+              <!-- <span class="eyebrow">ANEXOS OPCIONALES</span> -->
+              <h3 id="feedback-title">Calificación final de la retroalimentación 1 y 2</h3>
+              <!-- <p>Estas evidencias complementarias muestran el registro de aprobación comunicado automáticamente a
+                Moodle.</p> -->
             </div>
           </div>
-        </section>
-            </div>
+          <div class="feedback-grid">
+            <article class="feedback-card">
+              <img src="assets/img/retroalimentacion-1.png"
+                alt="Captura de la actividad Autoevaluación y Heteroevaluación del Estudiante, aprobada con 100 por ciento."
+                loading="lazy" />
+              <div class="feedback-copy">
+                <span>RETROALIMENTACIÓN 01</span>
+                <h4>Autoevaluación y Heteroevaluación del Estudiante</h4>
+                <!-- <p>Resultado final: 100 %. Estado enviado a Moodle: aprobado. Nota mínima de aprobación: 70 %.</p> -->
+              </div>
+            </article>
+            <article class="feedback-card">
+              <img src="assets/img/retroalimentacion-2.png"
+                alt="Captura de la actividad Coevaluación y otras formas de evaluación, aprobada con 100 por ciento."
+                loading="lazy" />
+              <div class="feedback-copy">
+                <span>RETROALIMENTACIÓN 02</span>
+                <h4>Coevaluación y otras formas de evaluación</h4>
+                <!-- <p>Resultado final: 100 %. Estado enviado a Moodle: aprobado. Nota mínima de aprobación: 70 %.</p> -->
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-            <footer>
-                <span>Luis Roberto Garcia Zaña · UNAB · Evaluación Educativa G5</span>
-                <button class="btn print" onclick="window.print()">⊞ Guardar como PDF</button>
-            </footer>
-        </main>
+      <section class="reflection-section" id="reflexion-global" aria-labelledby="reflection-title">
+        <div class="reflection-background" aria-hidden="true">“</div>
+        <div class="section-pre"><span class="section-num">05 -</span> REFLEXIÓN Y PROYECCIÓN</div>
+        <div class="reflection-grid">
+          <div>
+            <h2 id="reflection-title">Evaluar para<br><em>transformar,</em><br>no solo para<br>calificar.</h2>
+            <div class="quote-author">REFLEXIÓN DE CIERRE</div>
+          </div>
+          <div class="reflection-essay">
+            <p>Al reunir estas cuatro evidencias identifico una evolución en mi manera de pensar la evaluación. Comencé
+              analizando dos situaciones complementarias: la autoevaluación de una propuesta de aprendizaje virtual y la
+              heteroevaluación de tres proyectos colaborativos. Ambas me mostraron la importancia de contrastar los
+              juicios con evidencias, distinguir las puntuaciones provisionales de una calificación definitiva y
+              orientar mejoras según cada necesidad. Después analicé la coevaluación como oportunidad para desarrollar
+              juicio crítico y comunicación profesional. Finalmente diseñé un instrumento que traduce los resultados de
+              aprendizaje en criterios observables.</p>
+            <p>La comparación más significativa es entre evaluar al final de una actividad y evaluar a lo largo de su
+              construcción. En el primer enfoque predomina la nota; en el segundo, la evidencia orienta decisiones,
+              retroalimentación y oportunidades de mejora. Como docente de áreas tecnológicas, esta distinción resulta
+              especialmente importante porque el desempeño se verifica al resolver problemas, justificar cambios y hacer
+              funcionar una solución, no solo al recordar definiciones.</p>
+            <p>El portafolio también me recuerda que evaluar exige revisar la propia enseñanza. Cuando una evidencia
+              muestra dificultades reiteradas, la respuesta pedagógica no debería limitarse a penalizar; corresponde
+              analizar si los criterios fueron claros, si la demostración fue suficiente y qué acompañamiento necesita
+              el grupo.</p>
+            <div class="projection"><span>COMPROMISOS PARA MIS PRÓXIMAS CLASES</span>
+              <ol>
+                <li><strong>Antes:</strong> definir criterios y evidencias congruentes con el objetivo.</li>
+                <li><strong>Durante:</strong> incorporar una revisión intermedia y comentarios accionables.</li>
+                <li><strong>Después:</strong> documentar mejoras y ajustar la enseñanza con base en resultados.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+     <!--  <div class="footer-top"><img class="footer-logo" src="assets/img/logo-unab-cida.png"
+          alt="Logo Universidad Dr. Andrés Bello y CIDA" />
+        <div><strong>Una evidencia no termina al entregarse.<br>Empieza a tener valor cuando se reflexiona sobre
+            ella.</strong></div>
+      </div> -->
+      <div class="footer-base"><span>© 2026 - PORTAFOLIO - LUIS ROBERTO GARCÍA ZAÑA</span><a
+          href="#inicio">VOLVER AL INICIO</a><span>SONSONATE, EL SALVADOR</span></div>
+    </footer>
+  </div>
+
+  <dialog id="document-dialog" class="document-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-top">
+      <div><span>ARCHIVO DE EVIDENCIAS / DOCUMENTO</span>
+        <h2 id="dialog-title">Documento de evidencia</h2>
+      </div><button type="button" id="dialog-close" class="dialog-close" aria-label="Cerrar visor">✕</button>
     </div>
-
-    <script>
-        const fill = document.getElementById('progFill');
-
-        function updateProgress() {
-            const el = document.documentElement;
-            const scrolled = el.scrollTop || document.body.scrollTop;
-            const total = el.scrollHeight - el.clientHeight;
-            if (fill) {
-                fill.style.width = (total > 0 ? (scrolled / total) * 100 : 0).toFixed(1) + '%';
-            }
-        }
-
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        updateProgress();
-
-        const navLinks = Array.from(document.querySelectorAll('nav a'));
-        const sections = navLinks
-            .map(a => document.querySelector(a.getAttribute('href')))
-            .filter(Boolean);
-
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    navLinks.forEach(a => a.classList.remove('active'));
-                    const a = navLinks.find(link => link.getAttribute('href') === '#' + e.target.id);
-                    if (a) a.classList.add('active');
-                }
-            });
-        }, { threshold: 0.35 });
-
-        sections.forEach(s => io.observe(s));
-    </script>
+    <div class="dialog-content"><iframe id="document-frame" title="Vista previa del documento PDF"
+        loading="lazy"></iframe></div>
+    <div class="dialog-bottom">
+      <p>Si el navegador no muestra el PDF, utilice el enlace para abrirlo en otra pestaña.</p><a id="pdf-external"
+        href="#" target="_blank" rel="noopener">Abrir PDF completo ↗</a>
+    </div>
+  </dialog>
 </body>
+
 </html>
